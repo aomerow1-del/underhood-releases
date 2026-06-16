@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Underhood - Zero-effort project runner with built-in security sandboxing, malware detection, and secrets auditing.">
+  <title>Underhood — Zero-Effort Runner & Security Auditor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">🛡️</span>
+        <span class="logo-text">Underhood</span>
+      </div>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#preview">Preview</a>
+        <a href="#install">Install</a>
+        <a href="https://github.com/aomerow1-del/underhood-releases" target="_blank" class="nav-btn">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-bg-gradient"></div>
+    <div class="container hero-content">
+      <div class="badge-new">✨ v0.2.0 Secrets Scan Released</div>
+      <h1 class="hero-title">Zero-Effort Runner<br><span class="gradient-text">Zero-Trust Sandbox</span></h1>
+      <p class="hero-desc">
+        Underhood auto-detects runtime environments (Python, Node, Lua), auto-installs missing dependencies, and runs code in a secured malware-scanned sandbox with credentials audit.
+      </p>
+      
+      <div class="hero-actions">
+        <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/UnderhoodInstaller.msi" class="btn btn-primary">
+          <span class="btn-icon">📦</span> Download Installer
+        </a>
+        <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/Underhood-Portable.zip" class="btn btn-secondary">
+          <span class="btn-icon">⚡</span> Portable ZIP
+        </a>
+        <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/underhood-0.2.0.vsix" class="btn btn-secondary">
+          <span class="btn-icon">🔌</span> VS Code Ext
+        </a>
+      </div>
+      
+      <div class="hero-platforms">
+        <span>Windows 10/11</span> • <span>macOS 12+</span> • <span>VS Code Extension</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Sandbox Preview -->
+  <section id="preview" class="section preview-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Scan in Action</h2>
+        <p class="section-subtitle">Real-time dependency resolution, malware checking, and leak scanning</p>
+      </div>
+
+      <!-- CSS Scanner Mockup -->
+      <div class="mockup-window">
+        <div class="window-header">
+          <div class="window-buttons">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="window-title">Underhood Scanner Panel</div>
+        </div>
+        
+        <div class="window-body">
+          <div class="panel-layout">
+            
+            <!-- Sidebar -->
+            <div class="panel-sidebar">
+              <div class="sidebar-section">
+                <div class="sidebar-title">Active Environment</div>
+                <div class="active-file">
+                  <span class="env-icon">🚀</span>
+                  <div class="active-file-details">
+                    <span class="file-name">Main.tscn</span>
+                    <span class="runtime-tag">Godot Project</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="sidebar-section">
+                <div class="sidebar-title">Scanner Toggles</div>
+                <div class="toggle-row">
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked disabled>
+                    <span class="slider"></span>
+                  </label>
+                  <span class="toggle-label">Malware Scan</span>
+                </div>
+                <div class="toggle-row">
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked disabled>
+                    <span class="slider"></span>
+                  </label>
+                  <span class="toggle-label">Secrets & Leaks</span>
+                </div>
+                <div class="toggle-row">
+                  <label class="toggle-switch">
+                    <input type="checkbox" checked disabled>
+                    <span class="slider"></span>
+                  </label>
+                  <span class="toggle-label">Isolated Sandbox</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Terminal Results -->
+            <div class="panel-content">
+              <div class="console-log">
+                <div class="log-line"><span class="c-cyan">>></span> Analyzing folder structure...</div>
+                <div class="log-line"><span class="c-green">✓</span> Godot engine configuration recognized.</div>
+                <div class="log-line"><span class="c-cyan">>></span> Invoking local Windows Defender scan...</div>
+                <div class="log-line"><span class="c-green">✓</span> Defender signature scan completed. <span class="c-green">0 threats found.</span></div>
+                <div class="log-line"><span class="c-cyan">>></span> Initiating secrets scanner engine...</div>
+                <div class="log-line c-yellow">⚠️ Scan completed. 1 critical leak detected:</div>
+                
+                <!-- Leak Alert card -->
+                <div class="leak-card">
+                  <div class="leak-header">
+                    <span class="leak-tag critical">HIGH</span>
+                    <span class="leak-category">API Key / Credentials</span>
+                  </div>
+                  <div class="leak-body">
+                    <div class="leak-field"><span>File:</span> scenes/Main.tscn</div>
+                    <div class="leak-field"><span>Line:</span> 16</div>
+                    <div class="leak-field"><span>Leak:</span> <code class="redacted">passwd: 123***REDACTED***</code></div>
+                  </div>
+                </div>
+
+                <div class="log-line"><span class="c-green">✓</span> Analysis complete. Ready to execute.</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="section features-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Secure Pre-flight Execution</h2>
+        <p class="section-subtitle">Run untrusted code safely without wasting time on virtual environments</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3 class="feature-name">Malware Scanning</h3>
+          <p class="feature-desc">Integrates Windows Defender or VirusTotal to check script files recursively before local execution starts.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+          <h3 class="feature-name">Secrets Auditing</h3>
+          <p class="feature-desc">Robust class-based scanning engine spots leaked AWS credentials, Git Tokens, passwords, and PII in code/config files.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📦</div>
+          <h3 class="feature-name">Auto Dependency Resolution</h3>
+          <p class="feature-desc">Detects required imports, pulls them automatically into a sandboxed folder, and bypasses local virtualenvs completely.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🐳</div>
+          <h3 class="feature-name">Docker Sandbox Option</h3>
+          <p class="feature-desc">Isolates project runtimes completely from the host filesystem in a secure, containerized sandbox.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Installation / Downloads Section -->
+  <section id="install" class="section install-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Get Started with Underhood</h2>
+        <p class="section-subtitle">Select the format that fits your development workflow best</p>
+      </div>
+
+      <div class="install-cards">
+        <div class="install-card">
+          <h3 class="install-title">Desktop App</h3>
+          <p class="install-desc">Full WinForms/macOS graphical controller with sidebar tray, scan history logs, and sandbox settings.</p>
+          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/UnderhoodInstaller.msi" class="btn btn-primary btn-block">Download MSI Installer</a>
+        </div>
+
+        <div class="install-card">
+          <h3 class="install-title">VS Code Extension</h3>
+          <p class="install-desc">Run and audit scripts inline inside VS Code. Leverages the sidecar runner binary directly in the editor panel.</p>
+          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/underhood-0.2.0.vsix" class="btn btn-secondary btn-block">Download VSIX Extension</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 Underhood. Open source under the MIT License.</p>
+      <div class="footer-links">
+        <a href="https://github.com/aomerow1-del/underhood-releases" target="_blank">GitHub Project</a>
+        <a href="https://github.com/aomerow1-del/underhood-releases/releases" target="_blank">All Releases</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

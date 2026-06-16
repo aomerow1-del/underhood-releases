@@ -1,0 +1,17 @@
+Underhood End User License Agreement (EULA)
+Copyright (c) 2026 Underhood. All rights reserved.
+
+IMPORTANT NOTICE: Please read this End User License Agreement carefully before installing or using the Underhood software application. By installing, copying, or otherwise using the Software, you agree to be bound by the terms of this Agreement. If you do not agree to the terms of this Agreement, do not install or use the Software.
+
+1. License Grant: Underhood grants you a personal, non-exclusive, non-transferable, revocable, limited license to install and use the compiled binary installers of the Software on compatible devices solely for your development, environment analysis, and local workflow automation needs.
+
+2. Proprietary Rights and Closed Source: The Software is licensed, not sold. All rights, title, and interest in and to the Software (including but not limited to any code, executables, scripts, assets, design files, and documentation) are owned exclusively by the Underhood Team. This is a closed-source software product; you are only permitted to run the compiled binaries and extension packages provided directly by the Underhood Team.
+
+3. Restrictions on Use: You agree not to, and you will not permit others to:
+- Modify, make derivative works of, disassemble, decrypt, decompile, or reverse engineer any portion of the Software.
+- Distribute, lease, rent, sell, redistribute, sublicense, host, outsource, or otherwise commercially exploit the Software or make the installer files available to third parties without prior written consent.
+- Bypass, modify, defeat, or circumvent any security limits or features of the Software.
+
+4. Disclaimer of Warranty: THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE.
+
+5. Limitation of Liability: IN NO EVENT SHALL THE UNDERHOOD TEAM OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
