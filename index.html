@@ -1,393 +1,631 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Underhood - Zero-effort project runner with built-in security sandboxing, malware detection, and secrets auditing.">
-  <title>Underhood — Zero-Effort Runner & Security Auditor</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Underhood — Zero-effort runner with built-in security sandboxing, malware detection, auto dependency install, and secrets auditing. For VS Code, Cursor, Windsurf & Windows Desktop."/>
+<title>Underhood — Zero-Effort Runner & Zero-Trust Sandbox</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "primary": "#4edea3",
+                    "secondary-container": "#03b5d3",
+                    "on-secondary": "#003640",
+                    "error-container": "#93000a",
+                    "on-surface": "#dde4dd",
+                    "surface-container-high": "#242c27",
+                    "surface": "#0e1511",
+                    "secondary": "#4cd7f6",
+                    "on-secondary-fixed": "#001f26",
+                    "inverse-primary": "#006c49",
+                    "surface-variant": "#2f3632",
+                    "primary-fixed": "#6ffbbe",
+                    "on-primary-fixed-variant": "#005236",
+                    "outline-variant": "#3c4a42",
+                    "error": "#ffb4ab",
+                    "on-error-container": "#ffdad6",
+                    "primary-container": "#10b981",
+                    "surface-container-low": "#161d19",
+                    "on-primary": "#003824",
+                    "surface-bright": "#343b36",
+                    "surface-container": "#1a211d",
+                    "background": "#05070c",
+                    "surface-container-lowest": "#09100c",
+                    "tertiary": "#ffb3af",
+                    "on-tertiary": "#650911",
+                    "inverse-surface": "#dde4dd",
+                    "on-secondary-container": "#00424e",
+                    "on-surface-variant": "#bbcabf",
+                    "primary-fixed-dim": "#4edea3",
+                    "surface-dim": "#0e1511",
+                    "tertiary-container": "#fc7c78",
+                    "surface-container-highest": "#2f3632",
+                    "on-primary-fixed": "#002113",
+                    "on-tertiary-container": "#711419",
+                    "on-error": "#690005",
+                    "on-primary-container": "#00422b",
+                    "on-background": "#dde4dd",
+                    "surface-tint": "#4edea3",
+                    "outline": "#86948a",
+                    "inverse-on-surface": "#2b322d"
+                },
+                "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "full": "9999px"
+                },
+                "fontFamily": {
+                    "display": ["Outfit", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "mono": ["Fira Code", "monospace"]
+                }
+            }
+        }
+    }
+</script>
+<style>
+    body { background-color: #05070c; color: #dde4dd; overflow-x: hidden; font-family: 'Inter', sans-serif; }
+
+    .glass-panel {
+        background: rgba(14, 21, 17, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .glass-panel-heavy {
+        background: rgba(14, 21, 17, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .neon-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(78, 222, 163, 0.12);
+        box-shadow: 0 0 0 0 rgba(78, 222, 163, 0);
+    }
+    .neon-card:hover {
+        border-color: rgba(78, 222, 163, 0.4);
+        box-shadow: 0 0 25px rgba(78, 222, 163, 0.12);
+        transform: translateY(-4px);
+    }
+    .neon-card-cyan {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(76, 215, 246, 0.12);
+    }
+    .neon-card-cyan:hover {
+        border-color: rgba(76, 215, 246, 0.4);
+        box-shadow: 0 0 25px rgba(76, 215, 246, 0.12);
+        transform: translateY(-4px);
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #10b981, #4cd7f6);
+        color: #fff;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+    }
+    .btn-primary:hover {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+        transform: translateY(-2px);
+    }
+    .btn-ghost {
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.12);
+        color: #dde4dd;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+    .btn-ghost:hover {
+        background: rgba(255,255,255,0.06);
+        border-color: rgba(78,222,163,0.35);
+        transform: translateY(-2px);
+    }
+
+    .text-gradient {
+        background: linear-gradient(135deg, #4edea3, #4cd7f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .terminal-bg { background-color: #020408; }
+
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(24px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInMsg {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulseGlow {
+        0%, 100% { box-shadow: 0 0 5px rgba(78,222,163,0.4); }
+        50%       { box-shadow: 0 0 15px rgba(78,222,163,0.8); }
+    }
+    @keyframes ping-slow {
+        0%   { transform: scale(1);   opacity: 0.8; }
+        100% { transform: scale(1.8); opacity: 0; }
+    }
+
+    .stagger-1 { animation: fadeUp 0.7s ease-out 0.1s both; }
+    .stagger-2 { animation: fadeUp 0.7s ease-out 0.2s both; }
+    .stagger-3 { animation: fadeUp 0.7s ease-out 0.35s both; }
+    .stagger-4 { animation: fadeUp 0.7s ease-out 0.5s both; }
+
+    .chat-bubble { opacity: 0; animation: slideInMsg 0.4s ease forwards; animation-delay: var(--d, 0ms); }
+
+    .step-dot-active { animation: pulseGlow 1.5s ease-in-out infinite; }
+
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-track { background: #05070c; }
+    ::-webkit-scrollbar-thumb { background: #2f3632; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #86948a; }
+
+    .timeline-line { width: 2px; background: linear-gradient(to bottom, #10b981, #4cd7f6); }
+
+    /* Toggle switch visuals */
+    .toggle-on { background: rgba(78,222,163,0.15); border-color: rgba(78,222,163,0.5); }
+    .toggle-dot { box-shadow: 0 0 8px rgba(78,222,163,0.8); }
+</style>
 </head>
-<body>
+<body class="antialiased">
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="logo">
-        <span class="logo-icon">🛡️</span>
-        <span class="logo-text">Underhood</span>
-      </div>
-      <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#preview">Preview</a>
-        <a href="#tokens">Token Savings</a>
-        <a href="#usage">How It Works</a>
-        <a href="#install">Install</a>
-        <a href="https://github.com/aomerow1-del/underhood-releases" target="_blank" class="nav-btn">GitHub</a>
-      </div>
+<!-- ── NAV ─────────────────────────────────────────────────────────────── -->
+<nav class="fixed top-0 w-full z-50 glass-panel-heavy border-b border-white/10 transition-all duration-300">
+  <div class="flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
+    <div class="flex items-center gap-2">
+      <span class="text-xl">🛡️</span>
+      <span class="font-display font-bold text-lg text-on-surface">Underhood</span>
     </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="hero-bg-gradient"></div>
-    <div class="container hero-content">
-      <div class="badge-new">✨ v0.2.0 Secrets Scan Released</div>
-      <h1 class="hero-title">Zero-Effort Runner<br><span class="gradient-text">Zero-Trust Sandbox</span></h1>
-      <p class="hero-desc">
-        Underhood auto-detects runtime environments (Python, Node, Lua), auto-installs missing dependencies, and runs code in a secured malware-scanned sandbox with credentials audit.
-      </p>
-      
-      <div class="hero-actions">
-        <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/UnderhoodInstaller.msi" class="btn btn-primary">
-          <span class="btn-icon">📦</span> Download Installer
-        </a>
-        <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/Underhood-Portable.zip" class="btn btn-secondary">
-          <span class="btn-icon">⚡</span> Portable ZIP
-        </a>
-        <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/underhood-0.2.0.vsix" class="btn btn-secondary">
-          <span class="btn-icon">🔌</span> VS Code Ext
-        </a>
-      </div>
-      
-      <div class="hero-platforms">
-        <span>Windows 10/11</span> • <span>VS Code Extension</span> • <span>Cursor</span> • <span>Windsurf</span>
-      </div>
+    <div class="hidden md:flex items-center gap-6">
+      <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#features">Features</a>
+      <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#preview">Preview</a>
+      <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#token-savings">Token Savings</a>
+      <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#how-it-works">How It Works</a>
+      <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#install">Install</a>
     </div>
-  </header>
+    <a class="hidden md:flex items-center gap-2 btn-ghost px-4 py-2 rounded-lg text-sm" href="https://github.com/aomerow1-del/underhood-releases" target="_blank" rel="noopener">
+      <span class="material-symbols-outlined text-[16px]">code</span> GitHub
+    </a>
+  </div>
+</nav>
 
-  <!-- Interactive Sandbox Preview -->
-  <section id="preview" class="section preview-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Scan in Action</h2>
-        <p class="section-subtitle">Real-time dependency resolution, malware checking, and leak scanning</p>
-      </div>
+<!-- ── HERO ─────────────────────────────────────────────────────────────── -->
+<header class="relative min-h-screen flex flex-col items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
+  <!-- WebGL Shader Background -->
+  <div class="absolute inset-0 w-full h-full z-0 opacity-55">
+    <canvas id="shader-canvas" style="display:block;width:100%;height:100%"></canvas>
+    <script>
+    (function() {
+      const canvas = document.getElementById('shader-canvas');
+      function syncSize() {
+        const w = canvas.clientWidth || 1280, h = canvas.clientHeight || 720;
+        if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+      }
+      if (typeof ResizeObserver !== 'undefined') new ResizeObserver(syncSize).observe(canvas);
+      syncSize();
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) return;
+      const vs = `attribute vec2 a_position; varying vec2 v_uv; void main(){ v_uv = a_position*.5+.5; gl_Position=vec4(a_position,0.,1.); }`;
+      const fs = `precision highp float; uniform float u_time; uniform vec2 u_resolution;
+      void main(){
+        vec2 uv = gl_FragCoord.xy/u_resolution;
+        float t = u_time*.18;
+        float n1 = sin(uv.x*3.+t)*cos(uv.y*2.-t*.5);
+        float n2 = sin(uv.y*4.-t*.8)*cos(uv.x*2.5+t);
+        float n3 = sin((uv.x+uv.y)*2.+t*1.2);
+        vec3 base = vec3(.02,.028,.047);
+        vec3 c1 = vec3(.063,.725,.506);
+        vec3 c2 = vec3(.024,.714,.831);
+        vec3 col = base;
+        col = mix(col, c1, smoothstep(.2,.8,n1*.5+.5)*.28);
+        col = mix(col, c2, smoothstep(.3,.9,n2*.5+.5)*.28);
+        col = mix(col, c1, smoothstep(.4,1.,n3*.5+.5)*.18);
+        vec2 o1 = vec2(.3+.2*sin(t), .35+.18*cos(t));
+        vec2 o2 = vec2(.72+.18*cos(t*.7), .75+.12*sin(t*.5));
+        float d1 = length(uv-o1), d2 = length(uv-o2);
+        col += c1*(0.06/(d1+.12));
+        col += c2*(0.06/(d2+.12));
+        gl_FragColor = vec4(col,1.);
+      }`;
+      function cs(type,src){ const s=gl.createShader(type); gl.shaderSource(s,src); gl.compileShader(s); return s; }
+      const prog = gl.createProgram();
+      gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+      gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(prog); gl.useProgram(prog);
+      const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+      const pos = gl.getAttribLocation(prog,'a_position');
+      gl.enableVertexAttribArray(pos); gl.vertexAttribPointer(pos,2,gl.FLOAT,false,0,0);
+      const uT = gl.getUniformLocation(prog,'u_time'), uR = gl.getUniformLocation(prog,'u_resolution');
+      function render(t){ if(typeof ResizeObserver==='undefined') syncSize(); gl.viewport(0,0,canvas.width,canvas.height); gl.uniform1f(uT,t*.001); gl.uniform2f(uR,canvas.width,canvas.height); gl.drawArrays(gl.TRIANGLE_STRIP,0,4); requestAnimationFrame(render); }
+      render(0);
+    })();
+    </script>
+  </div>
 
-      <!-- CSS Scanner Mockup -->
-      <div class="mockup-window">
-        <div class="window-header">
-          <div class="window-buttons">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <div class="window-title">Underhood Scanner Panel</div>
+  <!-- Hero Content -->
+  <div class="relative z-10 w-full max-w-5xl mx-auto text-center flex flex-col items-center gap-6 stagger-1">
+    <div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/25 rounded-full px-4 py-1.5 text-sm text-primary font-medium mb-2">
+      ✨ v0.2.0 — Secrets Scan Released
+    </div>
+
+    <h1 class="font-display font-bold text-[56px] md:text-[72px] leading-[1.05] tracking-tight">
+      <span class="text-gradient">Zero-Effort Runner</span><br/>
+      <span class="text-on-surface">/ Zero-Trust Sandbox</span>
+    </h1>
+
+    <p class="text-lg md:text-xl text-on-surface-variant max-w-3xl mx-auto leading-relaxed">
+      Auto-detect runtimes, install missing dependencies in a secure sandbox, scan for malware with Windows Defender, and audit for leaked secrets — all in one tool.
+    </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-3 w-full max-w-2xl">
+      <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/UnderhoodInstaller.msi" class="btn-primary font-semibold px-6 py-3 rounded-xl flex items-center gap-2 text-sm">
+        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">download</span> MSI Installer
+      </a>
+      <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/Underhood-Portable.zip" class="btn-ghost px-6 py-3 rounded-xl flex items-center gap-2 text-sm">
+        <span class="material-symbols-outlined text-[18px]">folder_zip</span> Portable ZIP
+      </a>
+      <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/underhood-0.2.0.vsix" class="btn-ghost px-6 py-3 rounded-xl flex items-center gap-2 text-sm">
+        <span class="material-symbols-outlined text-[18px]">extension</span> VS Code / Cursor / Windsurf Ext
+      </a>
+    </div>
+
+    <!-- Platform Badges -->
+    <div class="flex flex-wrap items-center justify-center gap-5 mt-4 pt-5 border-t border-white/8 opacity-75 text-sm text-on-surface-variant">
+      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">desktop_windows</span> Windows 10/11</span>
+      <span class="text-outline-variant">•</span>
+      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">code</span> VS Code</span>
+      <span class="text-outline-variant">•</span>
+      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">terminal</span> Cursor</span>
+      <span class="text-outline-variant">•</span>
+      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">waves</span> Windsurf</span>
+    </div>
+  </div>
+</header>
+
+<!-- ── SCAN IN ACTION ──────────────────────────────────────────────────── -->
+<section class="py-20 px-6 relative z-10" id="preview">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14 stagger-2">
+      <h2 class="font-display font-bold text-4xl text-on-surface mb-3">Scan in Action</h2>
+      <p class="text-on-surface-variant text-lg">Real-time threat detection with a live terminal view.</p>
+    </div>
+
+    <!-- App Window Mockup -->
+    <div class="glass-panel rounded-2xl overflow-hidden mx-auto max-w-5xl border border-white/10 shadow-2xl stagger-3">
+      <!-- Title bar -->
+      <div class="bg-surface-container/60 px-4 py-3 flex items-center gap-3 border-b border-white/10">
+        <div class="flex gap-1.5">
+          <div class="w-3 h-3 rounded-full bg-error shadow-[0_0_6px_#ffb4ab]"></div>
+          <div class="w-3 h-3 rounded-full bg-[#fbbc04]"></div>
+          <div class="w-3 h-3 rounded-full bg-primary shadow-[0_0_6px_#4edea3]"></div>
         </div>
-        
-        <div class="window-body">
-          <div class="panel-layout">
-            
-            <!-- Sidebar -->
-            <div class="panel-sidebar">
-              <div class="sidebar-section">
-                <div class="sidebar-title">Active Environment</div>
-                <div class="active-file">
-                  <span class="env-icon">🚀</span>
-                  <div class="active-file-details">
-                    <span class="file-name">Main.tscn</span>
-                    <span class="runtime-tag">Godot Project</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="sidebar-section">
-                <div class="sidebar-title">Scanner Toggles</div>
-                <div class="toggle-row">
-                  <label class="toggle-switch">
-                    <input type="checkbox" checked disabled>
-                    <span class="slider"></span>
-                  </label>
-                  <span class="toggle-label">Malware Scan</span>
-                </div>
-                <div class="toggle-row">
-                  <label class="toggle-switch">
-                    <input type="checkbox" checked disabled>
-                    <span class="slider"></span>
-                  </label>
-                  <span class="toggle-label">Secrets & Leaks</span>
-                </div>
-                <div class="toggle-row">
-                  <label class="toggle-switch">
-                    <input type="checkbox" checked disabled>
-                    <span class="slider"></span>
-                  </label>
-                  <span class="toggle-label">Isolated Sandbox</span>
-                </div>
-              </div>
+        <div class="flex-1 text-center font-mono text-xs text-on-surface-variant">underhood-agent.exe — main.py</div>
+      </div>
+      <!-- Body -->
+      <div class="flex flex-col md:flex-row">
+        <!-- Left: Toggles -->
+        <div class="w-full md:w-56 bg-surface-container-low/80 p-5 border-r border-white/8 flex flex-col gap-5">
+          <p class="text-xs text-on-surface-variant font-semibold uppercase tracking-widest mb-1">Scan Config</p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[17px]">shield</span>Malware Scan</span>
+            <div class="w-9 h-5 toggle-on rounded-full relative border">
+              <div class="absolute right-0.5 top-0.5 w-4 h-4 bg-primary rounded-full toggle-dot"></div>
             </div>
-
-            <!-- Terminal Results -->
-            <div class="panel-content">
-              <div class="console-log">
-                <div class="log-line"><span class="c-cyan">>></span> Analyzing folder structure...</div>
-                <div class="log-line"><span class="c-green">✓</span> Godot engine configuration recognized.</div>
-                <div class="log-line"><span class="c-cyan">>></span> Invoking local Windows Defender scan...</div>
-                <div class="log-line"><span class="c-green">✓</span> Defender signature scan completed. <span class="c-green">0 threats found.</span></div>
-                <div class="log-line"><span class="c-cyan">>></span> Initiating secrets scanner engine...</div>
-                <div class="log-line c-yellow">⚠️ Scan completed. 1 critical leak detected:</div>
-                
-                <!-- Leak Alert card -->
-                <div class="leak-card">
-                  <div class="leak-header">
-                    <span class="leak-tag critical">HIGH</span>
-                    <span class="leak-category">API Key / Credentials</span>
-                  </div>
-                  <div class="leak-body">
-                    <div class="leak-field"><span>File:</span> scenes/Main.tscn</div>
-                    <div class="leak-field"><span>Line:</span> 16</div>
-                    <div class="leak-field"><span>Leak:</span> <code class="redacted">passwd: 123***REDACTED***</code></div>
-                  </div>
-                </div>
-
-                <div class="log-line"><span class="c-green">✓</span> Analysis complete. Ready to execute.</div>
-              </div>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[17px]">key</span>Secrets & Leaks</span>
+            <div class="w-9 h-5 toggle-on rounded-full relative border">
+              <div class="absolute right-0.5 top-0.5 w-4 h-4 bg-primary rounded-full toggle-dot"></div>
             </div>
-
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-primary text-[17px]">deployed_code</span>Sandbox</span>
+            <div class="w-9 h-5 toggle-on rounded-full relative border">
+              <div class="absolute right-0.5 top-0.5 w-4 h-4 bg-primary rounded-full toggle-dot"></div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- App Preview Screenshots -->
-      <div class="preview-showcase">
-        <div class="preview-card">
-          <div class="preview-card-header">
-            <h3>Desktop Application</h3>
-            <p>Complete environment diagnostics and sandboxed execution dashboard</p>
+        <!-- Right: Terminal -->
+        <div class="flex-1 terminal-bg p-5 font-mono text-sm overflow-x-auto">
+          <div class="text-on-surface-variant/50 mb-3 text-xs">Underhood v0.2.0 initialized — scanning main.py</div>
+          <div class="flex gap-2 mb-1.5"><span class="text-secondary">&gt;&gt;</span><span class="text-on-surface-variant">Detecting runtime...</span><span class="text-primary ml-auto">Python 3.11 ✓</span></div>
+          <div class="flex gap-2 mb-1.5"><span class="text-secondary">&gt;&gt;</span><span class="text-on-surface-variant">Scanning imports...</span></div>
+          <div class="flex gap-2 mb-1.5"><span class="text-primary">✓</span><span class="text-on-surface-variant">Dependencies resolved: numpy, requests, bs4</span></div>
+          <div class="flex gap-2 mb-1.5"><span class="text-primary">✓</span><span class="text-on-surface-variant">Malware scan clear — 0 threats</span></div>
+          <div class="flex gap-2 mb-3"><span class="text-[#fbbc04]">⚠</span><span class="text-[#fbbc04]">Scanning for secrets and credentials...</span></div>
+          <!-- Leak card -->
+          <div class="border border-error/40 bg-error/8 rounded-lg p-3 relative overflow-hidden">
+            <div class="absolute left-0 top-0 w-1 h-full bg-error shadow-[0_0_10px_#ffb4ab]"></div>
+            <div class="flex items-center gap-2 text-error font-bold text-xs mb-2 ml-2">
+              <span class="material-symbols-outlined text-[15px]">warning</span> HIGH SEVERITY — CREDENTIAL LEAK DETECTED
+            </div>
+            <div class="ml-2 text-xs text-on-surface-variant">
+              <span class="text-on-surface-variant/60">File:</span> <span class="text-error/80">scenes/Main.tscn</span> &nbsp;|&nbsp;
+              <span class="text-on-surface-variant/60">Line 16:</span> <span class="text-error">AWS_SECRET_KEY = "<span class="blur-sm select-none">AKIAIOSFODNN7EXAMPLE</span>"</span>
+            </div>
           </div>
-          <div class="preview-img-container">
-            <img src="desktop_preview.png" alt="Underhood Desktop App Dashboard" class="preview-img">
-          </div>
-        </div>
-        <div class="preview-card">
-          <div class="preview-card-header">
-            <h3>VS Code Extension</h3>
-            <p>Inline malware detection, dependency resolution, and leak alerts</p>
-          </div>
-          <div class="preview-img-container">
-            <img src="vscode_preview.png" alt="Underhood VS Code Extension" class="preview-img">
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section id="features" class="section features-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Secure Pre-flight Execution</h2>
-        <p class="section-subtitle">Run untrusted code safely without wasting time on virtual environments</p>
-      </div>
-
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">🛡️</div>
-          <h3 class="feature-name">Malware Scanning</h3>
-          <p class="feature-desc">Integrates Windows Defender or VirusTotal to check script files recursively before local execution starts.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">🔐</div>
-          <h3 class="feature-name">Secrets Auditing</h3>
-          <p class="feature-desc">Robust class-based scanning engine spots leaked AWS credentials, Git Tokens, passwords, and PII in code/config files.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">📦</div>
-          <h3 class="feature-name">Auto Dependency Resolution</h3>
-          <p class="feature-desc">Detects required imports, pulls them automatically into a sandboxed folder, and bypasses local virtualenvs completely.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-icon">🐳</div>
-          <h3 class="feature-name">Docker Sandbox Option</h3>
-          <p class="feature-desc">Isolates project runtimes completely from the host filesystem in a secure, containerized sandbox.</p>
+          <div class="flex items-center gap-1 mt-3 text-secondary"><span class="animate-pulse">_</span></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Token Savings Section -->
-  <section id="tokens" class="section tokens-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Save AI Tokens — <span class="gradient-text">Automatically</span></h2>
-        <p class="section-subtitle">Every missing dependency round-trip costs you thousands of context tokens. Underhood collapses the whole loop into one shot.</p>
+<!-- ── APP PREVIEWS ───────────────────────────────────────────────────── -->
+<section class="py-20 px-6 relative z-10 bg-surface-container-low/20 border-y border-white/5">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14">
+      <h2 class="font-display font-bold text-4xl text-on-surface mb-3">App Previews</h2>
+      <p class="text-on-surface-variant text-lg">Available as a desktop app or IDE extension</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Desktop App -->
+      <div class="glass-panel rounded-2xl overflow-hidden neon-card">
+        <div class="p-4 border-b border-white/10 flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">desktop_windows</span>
+          <span class="font-semibold text-on-surface">Desktop Application</span>
+          <span class="ml-auto text-xs bg-primary/10 text-primary border border-primary/20 rounded-full px-2 py-0.5">Windows</span>
+        </div>
+        <img src="desktop_preview.png" alt="Underhood Desktop Application preview" class="w-full object-cover"/>
+      </div>
+      <!-- VS Code Extension -->
+      <div class="glass-panel rounded-2xl overflow-hidden neon-card-cyan">
+        <div class="p-4 border-b border-white/10 flex items-center gap-3">
+          <span class="material-symbols-outlined text-secondary">extension</span>
+          <span class="font-semibold text-on-surface">VS Code / Cursor / Windsurf</span>
+          <span class="ml-auto text-xs bg-secondary/10 text-secondary border border-secondary/20 rounded-full px-2 py-0.5">VSIX</span>
+        </div>
+        <img src="vscode_preview.png" alt="Underhood VS Code Extension preview" class="w-full object-cover"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ──────────────────────────────────────────────────────── -->
+<section class="py-20 px-6 relative z-10" id="features">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14 stagger-1">
+      <h2 class="font-display font-bold text-4xl text-on-surface mb-3">Deep Technical Capabilities</h2>
+      <p class="text-on-surface-variant text-lg">Everything you need to run untrusted code safely.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="glass-panel p-6 rounded-2xl neon-card stagger-2">
+        <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 mb-4">
+          <span class="material-symbols-outlined text-primary text-[22px]">shield</span>
+        </div>
+        <h3 class="font-display font-semibold text-xl text-on-surface mb-2">Malware Scanning</h3>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Deep scans integrated directly with Windows Defender APIs. Blocks malicious execution before code ever reaches your host system.</p>
+      </div>
+      <div class="glass-panel p-6 rounded-2xl neon-card-cyan stagger-3">
+        <div class="w-11 h-11 rounded-xl bg-secondary/10 flex items-center justify-center border border-secondary/20 mb-4">
+          <span class="material-symbols-outlined text-secondary text-[22px]">key</span>
+        </div>
+        <h3 class="font-display font-semibold text-xl text-on-surface mb-2">Secrets Auditing</h3>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Real-time static analysis to find leaked API keys, credentials, and sensitive config data embedded in untrusted scripts.</p>
+      </div>
+      <div class="glass-panel p-6 rounded-2xl neon-card-cyan stagger-4">
+        <div class="w-11 h-11 rounded-xl bg-secondary/10 flex items-center justify-center border border-secondary/20 mb-4">
+          <span class="material-symbols-outlined text-secondary text-[22px]">inventory_2</span>
+        </div>
+        <h3 class="font-display font-semibold text-xl text-on-surface mb-2">Auto Dependency Resolution</h3>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Say goodbye to <code class="bg-black/40 px-1 py-0.5 rounded text-error text-xs">ModuleNotFoundError</code>. Underhood parses imports and auto-installs requirements in an isolated virtual environment.</p>
+      </div>
+      <div class="glass-panel p-6 rounded-2xl neon-card stagger-1">
+        <div class="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 mb-4">
+          <span class="material-symbols-outlined text-primary text-[22px]">deployed_code</span>
+        </div>
+        <h3 class="font-display font-semibold text-xl text-on-surface mb-2">Docker Sandbox Option</h3>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Spin up ephemeral containers for highly untrusted code payloads — fully isolated from your base OS.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TOKEN SAVINGS ─────────────────────────────────────────────────── -->
+<section class="py-20 px-6 relative z-10 bg-surface-container-low/20 border-y border-white/5" id="token-savings">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14">
+      <h2 class="font-display font-bold text-4xl text-on-surface mb-3">Save AI Tokens — <span class="text-gradient">Automatically</span></h2>
+      <p class="text-on-surface-variant text-lg max-w-2xl mx-auto">Every missing dependency round-trip costs thousands of context tokens. Underhood collapses the entire loop into one shot.</p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-5 mb-8">
+      <!-- WITHOUT -->
+      <div class="flex-1 glass-panel rounded-2xl overflow-hidden border border-error/25 relative">
+        <div class="absolute inset-0 bg-error/4 pointer-events-none"></div>
+        <div class="bg-surface-container-highest/80 px-4 py-3 border-b border-error/25 flex justify-between items-center relative z-10">
+          <span class="text-sm font-bold text-error flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">cancel</span>Without Underhood</span>
+          <span class="text-xs text-error/70 font-mono">~28,000 tokens</span>
+        </div>
+        <div class="p-4 font-mono text-xs flex flex-col gap-2.5 relative z-10">
+          <div class="bg-surface/60 p-2.5 rounded-lg border border-white/6 chat-bubble" style="--d:0ms"><span class="text-secondary">User:</span> "Run this ML script for me."</div>
+          <div class="bg-surface-container/60 p-2.5 rounded-lg border border-white/6 chat-bubble" style="--d:200ms"><span class="text-primary">AI:</span> "Install: <span class="text-secondary">pip install numpy torch scikit-learn</span>"</div>
+          <div class="bg-error/10 p-2.5 rounded-lg border border-error/25 chat-bubble" style="--d:400ms"><span class="font-bold text-error">Error:</span> ModuleNotFoundError: 'pandas'</div>
+          <div class="bg-surface/60 p-2.5 rounded-lg border border-white/6 chat-bubble" style="--d:600ms"><span class="text-secondary">User:</span> "I got a pandas error..."</div>
+          <div class="bg-surface-container/60 p-2.5 rounded-lg border border-white/6 chat-bubble" style="--d:800ms"><span class="text-primary">AI:</span> "Also run: <span class="text-secondary">pip install pandas matplotlib</span>"</div>
+          <div class="bg-error/10 p-2.5 rounded-lg border border-error/25 chat-bubble" style="--d:1000ms"><span class="font-bold text-error">Error:</span> RuntimeError: CUDA not available</div>
+          <div class="text-center text-xs opacity-40 italic chat-bubble" style="--d:1100ms">... 3 more turns ...</div>
+          <div class="bg-error/15 p-2.5 rounded-lg border border-error/30 text-error font-bold chat-bubble" style="--d:1200ms">⚠ 7 round-trips · ~28,000 tokens consumed</div>
+        </div>
       </div>
 
-      <div class="tokens-comparison">
-
-        <!-- WITHOUT column -->
-        <div class="tokens-col tokens-col--bad">
-          <div class="tokens-col-header">
-            <span class="tokens-col-icon">😵</span>
-            <div>
-              <div class="tokens-col-label without">Without Underhood</div>
-              <div class="tokens-col-sub">~15,000–30,000 tokens per run</div>
-            </div>
-          </div>
-          <div class="tokens-chat">
-            <div class="chat-msg user anim-slide-in" style="--d:0ms">Run this Python ML script for me.</div>
-            <div class="chat-msg ai anim-slide-in" style="--d:200ms">Sure! First install the dependencies:
-              <code class="chat-code">pip install numpy torch scikit-learn</code>
-            </div>
-            <div class="chat-msg user anim-slide-in" style="--d:400ms">Done. Now it says <span class="chat-err">ModuleNotFoundError: No module named 'pandas'</span></div>
-            <div class="chat-msg ai anim-slide-in" style="--d:600ms">Oops, also run:
-              <code class="chat-code">pip install pandas matplotlib</code>
-            </div>
-            <div class="chat-msg user anim-slide-in" style="--d:800ms">Still failing — <span class="chat-err">RuntimeError: CUDA not available</span></div>
-            <div class="chat-msg ai anim-slide-in" style="--d:1000ms">You need to install the CUDA-enabled build of PyTorch separately...
-            </div>
-            <div class="chat-cost anim-slide-in" style="--d:1200ms">⚠ 4 round-trips · ~28,000 tokens consumed</div>
-          </div>
-        </div>
-
-        <!-- divider -->
-        <div class="tokens-divider">
-          <div class="tokens-vs">VS</div>
-        </div>
-
-        <!-- WITH column -->
-        <div class="tokens-col tokens-col--good">
-          <div class="tokens-col-header">
-            <span class="tokens-col-icon">🚀</span>
-            <div>
-              <div class="tokens-col-label with">With Underhood</div>
-              <div class="tokens-col-sub">~1,500 tokens per run</div>
-            </div>
-          </div>
-          <div class="tokens-chat">
-            <div class="chat-msg user anim-slide-in" style="--d:0ms">Run this Python ML script for me.</div>
-            <div class="chat-msg ai anim-slide-in" style="--d:200ms">Sure! Just run it with Underhood — it will handle everything.</div>
-            <div class="chat-terminal anim-slide-in" style="--d:400ms">
-              <div class="terminal-line"><span class="t-cyan">&gt;&gt;</span> Detecting runtime… <span class="t-green">Python 3.11 ✓</span></div>
-              <div class="terminal-line"><span class="t-cyan">&gt;&gt;</span> Scanning imports…</div>
-              <div class="terminal-line"><span class="t-yellow">→</span> Installing numpy, torch, scikit-learn, pandas, matplotlib</div>
-              <div class="terminal-line"><span class="t-green">✓</span> All dependencies resolved in sandbox</div>
-              <div class="terminal-line"><span class="t-green">✓</span> Script executed successfully</div>
-            </div>
-            <div class="chat-cost good anim-slide-in" style="--d:700ms">✅ 1 round-trip · ~1,500 tokens consumed</div>
-          </div>
-        </div>
-
+      <!-- VS divider -->
+      <div class="flex lg:flex-col items-center justify-center gap-3 py-4">
+        <div class="flex-1 h-px lg:w-px lg:h-full bg-white/8"></div>
+        <div class="bg-surface-container border border-white/15 text-on-surface-variant text-xs font-bold px-2 py-1 rounded-lg">VS</div>
+        <div class="flex-1 h-px lg:w-px lg:h-full bg-white/8"></div>
       </div>
 
-      <!-- Savings callout bar -->
-      <div class="tokens-callout">
-        <div class="tokens-stat">
-          <div class="tokens-stat-num">95<span class="tokens-stat-pct">%</span></div>
-          <div class="tokens-stat-label">fewer tokens per dependency loop</div>
+      <!-- WITH -->
+      <div class="flex-1 glass-panel rounded-2xl overflow-hidden border border-primary/30 relative shadow-[0_0_40px_rgba(78,222,163,0.08)]">
+        <div class="absolute inset-0 bg-primary/4 pointer-events-none"></div>
+        <div class="bg-surface-container-highest/80 px-4 py-3 border-b border-primary/30 flex justify-between items-center relative z-10">
+          <span class="text-sm font-bold text-primary flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">check_circle</span>With Underhood</span>
+          <span class="text-xs text-primary/70 font-mono">~1,500 tokens</span>
         </div>
-        <div class="tokens-stat-divider"></div>
-        <div class="tokens-stat">
-          <div class="tokens-stat-num">1<span class="tokens-stat-pct">x</span></div>
-          <div class="tokens-stat-label">round-trip instead of 4+</div>
-        </div>
-        <div class="tokens-stat-divider"></div>
-        <div class="tokens-stat">
-          <div class="tokens-stat-num">0</div>
-          <div class="tokens-stat-label">manual pip/npm installs needed</div>
+        <div class="p-4 font-mono text-xs flex flex-col gap-2.5 relative z-10">
+          <div class="bg-surface/60 p-2.5 rounded-lg border border-white/6 chat-bubble" style="--d:0ms"><span class="text-secondary">User:</span> "Run this ML script for me."</div>
+          <div class="bg-surface-container/60 p-2.5 rounded-lg border border-white/6 chat-bubble" style="--d:200ms"><span class="text-primary">AI:</span> "Sure, just press Ctrl+Shift+U and Underhood handles everything."</div>
+          <div class="terminal-bg p-3 rounded-lg border border-primary/20 chat-bubble" style="--d:400ms">
+            <div class="text-secondary mb-1">&gt;&gt; Detecting runtime... <span class="text-primary">Python 3.11 ✓</span></div>
+            <div class="text-secondary mb-1">&gt;&gt; Scanning imports...</div>
+            <div class="text-[#fbbc04] mb-1">→ Installing: numpy, torch, scikit-learn, pandas, matplotlib</div>
+            <div class="text-primary mb-1">✓ All dependencies resolved in sandbox</div>
+            <div class="text-primary">✓ Script executed successfully</div>
+          </div>
+          <div class="bg-surface-container/60 p-2.5 rounded-lg border border-white/6 chat-bubble" style="--d:650ms"><span class="text-primary">AI:</span> "Done. Here is your output."</div>
+          <div class="bg-primary/12 p-2.5 rounded-lg border border-primary/30 text-primary font-bold chat-bubble" style="--d:750ms">✅ 1 round-trip · ~1,500 tokens consumed</div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Usage Guide Section -->
-  <section id="usage" class="section usage-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">How It Works</h2>
-        <p class="section-subtitle">A simple 3-step security audit workflow for your projects</p>
+    <!-- Stats bar -->
+    <div class="glass-panel-heavy rounded-2xl p-6 flex flex-wrap justify-around items-center border border-primary/20 shadow-[inset_0_0_30px_rgba(78,222,163,0.04)]">
+      <div class="text-center px-4">
+        <div class="font-display font-bold text-5xl text-gradient leading-none mb-1">95%</div>
+        <div class="text-sm text-on-surface-variant">fewer tokens per run</div>
       </div>
+      <div class="w-px h-12 bg-white/10 hidden md:block"></div>
+      <div class="text-center px-4">
+        <div class="font-display font-bold text-5xl text-gradient leading-none mb-1">1×</div>
+        <div class="text-sm text-on-surface-variant">round-trip instead of 7+</div>
+      </div>
+      <div class="w-px h-12 bg-white/10 hidden md:block"></div>
+      <div class="text-center px-4">
+        <div class="font-display font-bold text-5xl text-gradient leading-none mb-1">0</div>
+        <div class="text-sm text-on-surface-variant">manual pip/npm installs</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div class="usage-timeline">
-        <div class="timeline-line">
-          <div class="timeline-progress"></div>
-        </div>
-        
-        <!-- Step 1 -->
-        <div class="timeline-step">
-          <div class="step-marker">
-            <span class="step-num">1</span>
-          </div>
-          <div class="step-content">
-            <h3 class="step-title">Choose Your Interface</h3>
-            <p class="step-desc">
-              Download the standalone **Windows WinForms Desktop app** for global environment diagnostics, or install the **VS Code Extension** to run checks directly from your editor.
-            </p>
-            <div class="step-badge">🚀 Fast Setup</div>
-          </div>
-        </div>
+<!-- ── HOW IT WORKS ───────────────────────────────────────────────────── -->
+<section class="py-20 px-6 relative z-10" id="how-it-works">
+  <div class="max-w-3xl mx-auto">
+    <div class="text-center mb-14">
+      <h2 class="font-display font-bold text-4xl text-on-surface mb-3">How It Works</h2>
+      <p class="text-on-surface-variant text-lg">A 3-step zero-effort security workflow.</p>
+    </div>
 
-        <!-- Step 2 -->
-        <div class="timeline-step">
-          <div class="step-marker">
-            <span class="step-num">2</span>
-          </div>
-          <div class="step-content">
-            <h3 class="step-title">Configure Scan Toggles</h3>
-            <p class="step-desc">
-              Open settings to enable your desired scan depth. Turn on **Malware Scan** (Windows Defender signature verification) and **Secrets & Leaks Scan** to check for passwords, keys, and personal information.
-            </p>
-            <div class="step-badge">🔐 Zero Trust</div>
-          </div>
+    <div class="flex flex-col gap-0">
+      <!-- Step 1 -->
+      <div class="flex gap-6">
+        <div class="flex flex-col items-center">
+          <div class="w-10 h-10 rounded-full bg-primary/15 border-2 border-primary flex items-center justify-center font-display font-bold text-primary text-sm step-dot-active">1</div>
+          <div class="timeline-line flex-1 mt-2 mb-2 w-0.5"></div>
         </div>
-
-        <!-- Step 3 -->
-        <div class="timeline-step">
-          <div class="step-marker">
-            <span class="step-num">3</span>
-          </div>
-          <div class="step-content">
-            <h3 class="step-title">Scan and Self-Repair</h3>
-            <p class="step-desc">
-              Point Underhood to your project. The engine automatically checks for dependency leaks, runs a malware scan in a secured sandbox, and flags any secret leaks before execution.
-            </p>
-            <div class="step-badge">⚡ Auto Diagnostics</div>
-          </div>
+        <div class="pb-10 pt-1">
+          <div class="inline-flex items-center gap-1.5 bg-primary/10 border border-primary/25 rounded-full px-3 py-1 text-xs text-primary font-medium mb-3">🚀 Fast Setup</div>
+          <h3 class="font-display font-semibold text-xl text-on-surface mb-2">Choose Your Interface</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">Install the MSI Desktop App or the VSIX extension for VS Code, Cursor, or Windsurf. No configuration needed.</p>
+        </div>
+      </div>
+      <!-- Step 2 -->
+      <div class="flex gap-6">
+        <div class="flex flex-col items-center">
+          <div class="w-10 h-10 rounded-full bg-secondary/15 border-2 border-secondary flex items-center justify-center font-display font-bold text-secondary text-sm">2</div>
+          <div class="timeline-line flex-1 mt-2 mb-2 w-0.5"></div>
+        </div>
+        <div class="pb-10 pt-1">
+          <div class="inline-flex items-center gap-1.5 bg-secondary/10 border border-secondary/25 rounded-full px-3 py-1 text-xs text-secondary font-medium mb-3">🔐 Zero Trust</div>
+          <h3 class="font-display font-semibold text-xl text-on-surface mb-2">Configure Scan Toggles</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">Enable or disable Malware Scan, Secrets & Leaks audit, and Isolated Sandbox with a single click — per project.</p>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div class="flex gap-6">
+        <div class="flex flex-col items-center">
+          <div class="w-10 h-10 rounded-full bg-primary/15 border-2 border-primary flex items-center justify-center font-display font-bold text-primary text-sm">3</div>
+        </div>
+        <div class="pt-1">
+          <div class="inline-flex items-center gap-1.5 bg-primary/10 border border-primary/25 rounded-full px-3 py-1 text-xs text-primary font-medium mb-3">⚡ Auto Diagnostics</div>
+          <h3 class="font-display font-semibold text-xl text-on-surface mb-2">Scan & Self-Repair</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed">Press <kbd class="bg-surface-container px-1.5 py-0.5 rounded text-xs border border-white/15">Ctrl+Shift+U</kbd> or click ▶. Underhood scans, installs all missing packages, and executes your code — no babysitting required.</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Installation / Downloads Section -->
-  <section id="install" class="section install-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Get Started with Underhood</h2>
-        <p class="section-subtitle">Select the format that fits your development workflow best</p>
-      </div>
-
-      <div class="install-cards">
-        <div class="install-card">
-          <h3 class="install-title">Desktop App</h3>
-          <p class="install-desc">Full WinForms graphical controller with sidebar tray, scan history logs, and sandbox settings.</p>
-          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/UnderhoodInstaller.msi" class="btn btn-primary btn-block">Download MSI Installer</a>
+<!-- ── INSTALL ────────────────────────────────────────────────────────── -->
+<section class="py-20 px-6 relative z-10 bg-surface-container-low/20 border-t border-white/5" id="install">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-14">
+      <h2 class="font-display font-bold text-4xl text-on-surface mb-3">Get Started</h2>
+      <p class="text-on-surface-variant text-lg">One download. Zero setup headaches.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Desktop App -->
+      <div class="glass-panel p-7 rounded-2xl neon-card flex flex-col gap-5">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/25 flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary text-[24px]">desktop_windows</span>
+          </div>
+          <div>
+            <div class="font-display font-semibold text-lg text-on-surface">Desktop App</div>
+            <div class="text-xs text-on-surface-variant">Windows 10/11 · ~22 MB</div>
+          </div>
         </div>
-
-        <div class="install-card">
-          <h3 class="install-title">VS Code / Cursor / Windsurf</h3>
-          <p class="install-desc">Run and audit scripts inline in your editor. Fully supports Cursor, Windsurf, and VS Code via direct VSIX extension installation.</p>
-          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/underhood-0.2.0.vsix" class="btn btn-secondary btn-block">Download VSIX Extension</a>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Full standalone app with drag-and-drop support, history, starter kits, and AI tools panel.</p>
+        <div class="flex flex-col gap-2 mt-auto">
+          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/UnderhoodInstaller.msi" class="btn-primary px-5 py-3 rounded-xl text-sm font-semibold text-center flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1">download</span> Download MSI Installer
+          </a>
+          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/Underhood-Portable.zip" class="btn-ghost px-5 py-3 rounded-xl text-sm font-medium text-center flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-[17px]">folder_zip</span> Portable ZIP (no install)
+          </a>
+        </div>
+      </div>
+      <!-- Extension -->
+      <div class="glass-panel p-7 rounded-2xl neon-card-cyan flex flex-col gap-5">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-secondary/10 border border-secondary/25 flex items-center justify-center">
+            <span class="material-symbols-outlined text-secondary text-[24px]">extension</span>
+          </div>
+          <div>
+            <div class="font-display font-semibold text-lg text-on-surface">IDE Extension</div>
+            <div class="text-xs text-on-surface-variant">VS Code · Cursor · Windsurf</div>
+          </div>
+        </div>
+        <p class="text-on-surface-variant text-sm leading-relaxed">Install via <strong class="text-on-surface">Extensions → Install from VSIX</strong> in your editor. Works across all three editors with identical UX.</p>
+        <div class="flex flex-col gap-2 mt-auto">
+          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/underhood-0.2.0.vsix" class="btn-ghost px-5 py-3 rounded-xl text-sm font-semibold text-center flex items-center justify-center gap-2 border-secondary/30 hover:border-secondary/60">
+            <span class="material-symbols-outlined text-[17px]">extension</span> Download VSIX Extension
+          </a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-content">
-      <p>&copy; 2026 Underhood. All rights reserved. Licensed under the <a href="License.txt" target="_blank" style="color: #6b7280; text-decoration: underline;">Underhood EULA</a>.</p>
-      <div class="footer-links">
-        <a href="https://github.com/aomerow1-del/underhood-releases" target="_blank">GitHub Project</a>
-        <a href="https://github.com/aomerow1-del/underhood-releases/releases" target="_blank">All Releases</a>
-      </div>
+<!-- ── FOOTER ────────────────────────────────────────────────────────── -->
+<footer class="py-10 px-6 bg-surface-container-lowest border-t border-outline-variant">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-5">
+    <div class="flex items-center gap-2">
+      <span class="text-lg">🛡️</span>
+      <span class="font-display font-bold text-on-surface">Underhood</span>
     </div>
-  </footer>
+    <div class="flex flex-wrap items-center justify-center gap-5 text-sm text-on-surface-variant">
+      <a href="https://github.com/aomerow1-del/underhood-releases/releases" target="_blank" class="hover:text-primary transition-colors">Releases</a>
+      <a href="https://github.com/aomerow1-del/underhood-releases" target="_blank" class="hover:text-primary transition-colors">GitHub</a>
+    </div>
+    <div class="text-xs text-on-surface-variant opacity-60 text-center">
+      © 2026 Underhood. All rights reserved. Licensed under the Underhood EULA.
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
