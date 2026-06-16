@@ -10,7 +10,7 @@ Underhood is a sophisticated local analyzer and runner built for developers, vib
 ## 🗺️ Interactive System Architecture
 
 To understand the core design, visual workflows, and safety routines of Project Underhood, we have created an interactive blueprint dashboard. Open it directly in your web browser:
-👉 **[underhood_architecture.html](../Underhood/underhood_architecture.html)**
+👉 **[underhood_architecture.html](underhood_architecture.html)**
 
 ---
 
@@ -20,7 +20,8 @@ To understand the core design, visual workflows, and safety routines of Project 
 * **Local Tool Audit Grid:** Rapidly verifies presence and version of compilers, runtimes, package managers, and SDKs (Node, Python, Java JDK, Android SDK, Gradle, Rust, Unity, Godot, Go, CMake, and more).
 * **Dynamic Package Manager Fallbacks:** If a required tool is missing, Underhood intelligently generates installation commands by checking for `winget`, and gracefully falls back to `choco` or `scoop`. If no package managers exist, it provides official manual download links.
 * **Self-Repairing Execution Loop:** Executes Python, Node.js, and Lua scripts. If it encounters a missing dependency (e.g., `ModuleNotFoundError` or `Cannot find module`), it traps the error, resolves the package name, installs it locally via `pip/npm/luarocks`, and retries execution.
-* **Triple Interface Architecture:** Use it as a drop-zone **Tauri Desktop Application**, a fully integrated **VS Code Extension**, or a native **MCP Server** for AI coding assistants.
+* **VirusTotal & Secrets Scanning:** Automatically checks compiled executables/scripts against the VirusTotal database (hash-only) before execution, and runs a secrets scanning pass to detect accidental API key leaks.
+* **Triple Interface Architecture:** Use it as a drop-zone **C# WinForms Desktop Application**, a fully integrated **VS Code Extension**, or a native **MCP Server** for AI coding assistants.
 
 ---
 
@@ -33,11 +34,11 @@ The Underhood VS Code extension brings the power of the engine directly into you
 - **1-Click Installs:** Missing a tool? Click the "Run Install Command in Terminal" button to automatically open a VS Code terminal and paste the exact `winget`/`choco`/`scoop` command required to install it.
 
 ### 2. MCP Server (Model Context Protocol)
-Underhood includes a built-in MCP server, allowing AI coding assistants like **Claude Desktop** and **Cursor** to natively invoke Underhood as a tool.
+Underhood includes a built-in MCP server, allowing AI coding assistants like **Claude Desktop**, **Cursor**, **Windsurf**, and **Devin** to natively invoke Underhood as a tool.
 - **Zero-Config Agent Troubleshooting:** Agents can invoke the `analyze_project` tool to understand exactly what a repository is, what tools it requires, and what is missing on your local machine, allowing them to fix environment errors autonomously without guessing.
 
-### 3. Tauri Desktop GUI
-A standalone, sandboxed desktop application where you can drag-and-drop project folders. It visualizes the execution pipeline, showing exactly which dependencies were auto-installed in the sandboxed `.underhood_libs` directory before running your code.
+### 3. C# WinForms Desktop GUI
+A standalone, lightweight C# desktop application where you can drag-and-drop project folders. It visualizes the execution pipeline, showing exactly which dependencies were auto-installed in the local `.underhood_libs` directory before running your code.
 
 ---
 
@@ -45,15 +46,16 @@ A standalone, sandboxed desktop application where you can drag-and-drop project 
 
 Underhood is distributed as pre-compiled installers and extensions. To download and install the software, please refer to the **Releases** page on GitHub:
 
-### 1. Tauri Standalone Desktop Application (Windows & macOS)
+### 1. Standalone Windows Desktop Application
 * Navigate to the latest release on our GitHub Releases page.
-* Download the appropriate installer:
-  * **Windows**: `Underhood-Setup.msi` or standalone `Underhood.exe`
-  * **macOS**: `Underhood.dmg`
-* Run the installer file and complete the installation wizard setup.
+* Download the appropriate installer or bundle:
+  * **MSI Installer**: `UnderhoodInstaller.msi`
+  * **EXE Installer**: `UnderhoodInstaller.exe`
+  * **Portable Zip**: `Underhood-Portable.zip`
+* Run the installer file to complete the setup or extract the portable ZIP.
 
 ### 2. VS Code Extension
-* Download the packaged extension file (`underhood-0.1.0.vsix`) from the latest release page.
+* Download the packaged extension file (`underhood-0.2.0.vsix`) from the latest release page.
 * Open VS Code, open the Extensions side panel (`Ctrl+Shift+X` or `Cmd+Shift+X`).
 * Click the menu icon (`...`) in the top-right corner of the Extensions view and select **Install from VSIX...**.
 * Select the downloaded `.vsix` file to install it directly.
@@ -115,10 +117,9 @@ Each step sends your entire source code context and history back to the LLM API.
 
 Underhood maintains detailed diagnostic logs for troubleshooting environment issues and tracking executions.
 
-### Log File Locations
+### Log File Locations & Viewers
 
-* **Tauri Desktop Application (Windows):** `%APPDATA%\com.underhood.dev\logs\underhood.log`
-* **Tauri Desktop Application (macOS):** `~/Library/Logs/com.underhood.dev/underhood.log`
+* **WinForms Desktop Application (Windows):** Real-time execution and installation logs are displayed directly inside the app's expandable output logs panel (**View Output Logs**). Temporary installation logs are written to `%TEMP%\underhood_log_<timestamp>.txt`.
 * **VS Code Extension (VSIX):** `~/.underhood/logs/underhood-YYYY-MM-DD.log` (daily rotating)
 
 ### VS Code Extension Output Channel
@@ -149,7 +150,7 @@ Underhood includes a built-in security feature to scan executable and script fil
 **Privacy First:** This is a **hash-only** scan. Underhood calculates the SHA-256 hash of each file locally and only sends the hash to the VirusTotal API. Your actual source code and file contents are **never uploaded**.
 
 ### How to Enable
-* **Tauri Desktop App:** Go to the **Scanner Settings** tab in the main interface, toggle it on, and enter your VirusTotal API key.
+* **WinForms Desktop App:** Go to the **Scanner Settings** tab in the main interface, toggle it on, and enter your VirusTotal API key.
 * **VS Code Extension:** Open VS Code settings, search for `underhood.virusTotalEnabled` and check the box. Then, enter your API key in `underhood.virusTotalApiKey`.
 
 If threats are detected, the scan will immediately block execution and surface a warning banner in the UI showing which files were flagged.

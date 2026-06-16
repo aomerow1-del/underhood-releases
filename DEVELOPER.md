@@ -12,8 +12,8 @@ Underhood/
 │   ├── analyzer.py       
 │   └── runner.py         # Self-repairing executor that catches errors and auto-installs packages
 ├── mcp-server/           # Standardized Model Context Protocol server exposing Underhood to AI agents
-├── src/                  # Tauri frontend interface (HTML, Vanilla CSS, JS)
-├── src-tauri/            # Rust host backend (pipes sidecar output, manages Windows UNC path issues)
+├── src-csharp/           # Windows desktop app source code in C# (WinForms)
+├── src-macos/            # macOS native desktop app source code in Swift (SwiftUI)
 ├── vscode-extension/     # VS Code Extension source code, interface panels, and VSIX bundle
 └── tests/                # Integration and runner self-repair validation suites
 ```
@@ -26,7 +26,7 @@ Underhood/
 Make sure you have the following installed on your Windows machine:
 1. **Python 3.10+** (with the `py` launcher)
 2. **Node.js** (v18+)
-3. **Rust & Cargo** (via [rustup.rs](https://rustup.rs/))
+3. **Visual Studio 2022** (with MSBuild and modern C# Roslyn compiler `csc.exe`)
 
 ### 1. Run Tests
 Validate the analyzer rules and execution routines:
@@ -38,12 +38,15 @@ py tests/test_analyzer_quick.py
 py -m pytest tests/integration_test.py tests/test_runner_unit.py -v
 ```
 
-### 2. Build the Tauri App & Sidecar Binary
-Run the integrated build script to build the sidecar EXE via PyInstaller, copy sidecars to resource directories, and package the Tauri MSI/EXE installers:
+### 2. Build the Desktop App & Installer
+Run the integrated build script. This compiles the Python runner sidecar EXE, packages the obfuscated VS Code extension VSIX, compiles the C# WinForms application, and packages all final installer bundles:
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\build.ps1
+powershell -ExecutionPolicy Bypass -File .\build_all.ps1
 ```
-*Compiled artifacts will be located under `src-tauri/target/release/bundle/msi/`.*
+*Compiled installer artifacts will be located under the `dist/` directory:*
+- `dist\Underhood-Portable.zip` (Portable ZIP archive)
+- `dist\UnderhoodInstaller.msi` (MSI Installer package)
+- `dist\UnderhoodInstaller.exe` (Self-extracting EXE installer)
 
 ### 3. Package the VS Code Extension
 To compile the TypeScript panels and package the `.vsix` bundle:
@@ -52,7 +55,7 @@ cd vscode-extension
 npm install
 npm run package
 ```
-*This outputs `vscode-extension/underhood-0.1.0.vsix`, which you can install directly into VS Code via "Install from VSIX...".*
+*This outputs `vscode-extension/underhood-0.2.0.vsix`, which you can install directly into VS Code via "Install from VSIX...".*
 
 ### 4. Run the MCP Server
 To run the Model Context Protocol server for AI integration:
