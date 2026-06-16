@@ -22,6 +22,7 @@
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#preview">Preview</a>
+        <a href="#tokens">Token Savings</a>
         <a href="#usage">How It Works</a>
         <a href="#install">Install</a>
         <a href="https://github.com/aomerow1-del/underhood-releases" target="_blank" class="nav-btn">GitHub</a>
@@ -205,6 +206,91 @@
           <div class="feature-icon">🐳</div>
           <h3 class="feature-name">Docker Sandbox Option</h3>
           <p class="feature-desc">Isolates project runtimes completely from the host filesystem in a secure, containerized sandbox.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Token Savings Section -->
+  <section id="tokens" class="section tokens-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Save AI Tokens — <span class="gradient-text">Automatically</span></h2>
+        <p class="section-subtitle">Every missing dependency round-trip costs you thousands of context tokens. Underhood collapses the whole loop into one shot.</p>
+      </div>
+
+      <div class="tokens-comparison">
+
+        <!-- WITHOUT column -->
+        <div class="tokens-col tokens-col--bad">
+          <div class="tokens-col-header">
+            <span class="tokens-col-icon">😵</span>
+            <div>
+              <div class="tokens-col-label without">Without Underhood</div>
+              <div class="tokens-col-sub">~15,000–30,000 tokens per run</div>
+            </div>
+          </div>
+          <div class="tokens-chat">
+            <div class="chat-msg user anim-slide-in" style="--d:0ms">Run this Python ML script for me.</div>
+            <div class="chat-msg ai anim-slide-in" style="--d:200ms">Sure! First install the dependencies:
+              <code class="chat-code">pip install numpy torch scikit-learn</code>
+            </div>
+            <div class="chat-msg user anim-slide-in" style="--d:400ms">Done. Now it says <span class="chat-err">ModuleNotFoundError: No module named 'pandas'</span></div>
+            <div class="chat-msg ai anim-slide-in" style="--d:600ms">Oops, also run:
+              <code class="chat-code">pip install pandas matplotlib</code>
+            </div>
+            <div class="chat-msg user anim-slide-in" style="--d:800ms">Still failing — <span class="chat-err">RuntimeError: CUDA not available</span></div>
+            <div class="chat-msg ai anim-slide-in" style="--d:1000ms">You need to install the CUDA-enabled build of PyTorch separately...
+            </div>
+            <div class="chat-cost anim-slide-in" style="--d:1200ms">⚠ 4 round-trips · ~28,000 tokens consumed</div>
+          </div>
+        </div>
+
+        <!-- divider -->
+        <div class="tokens-divider">
+          <div class="tokens-vs">VS</div>
+        </div>
+
+        <!-- WITH column -->
+        <div class="tokens-col tokens-col--good">
+          <div class="tokens-col-header">
+            <span class="tokens-col-icon">🚀</span>
+            <div>
+              <div class="tokens-col-label with">With Underhood</div>
+              <div class="tokens-col-sub">~1,500 tokens per run</div>
+            </div>
+          </div>
+          <div class="tokens-chat">
+            <div class="chat-msg user anim-slide-in" style="--d:0ms">Run this Python ML script for me.</div>
+            <div class="chat-msg ai anim-slide-in" style="--d:200ms">Sure! Just run it with Underhood — it will handle everything.</div>
+            <div class="chat-terminal anim-slide-in" style="--d:400ms">
+              <div class="terminal-line"><span class="t-cyan">&gt;&gt;</span> Detecting runtime… <span class="t-green">Python 3.11 ✓</span></div>
+              <div class="terminal-line"><span class="t-cyan">&gt;&gt;</span> Scanning imports…</div>
+              <div class="terminal-line"><span class="t-yellow">→</span> Installing numpy, torch, scikit-learn, pandas, matplotlib</div>
+              <div class="terminal-line"><span class="t-green">✓</span> All dependencies resolved in sandbox</div>
+              <div class="terminal-line"><span class="t-green">✓</span> Script executed successfully</div>
+            </div>
+            <div class="chat-cost good anim-slide-in" style="--d:700ms">✅ 1 round-trip · ~1,500 tokens consumed</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Savings callout bar -->
+      <div class="tokens-callout">
+        <div class="tokens-stat">
+          <div class="tokens-stat-num">95<span class="tokens-stat-pct">%</span></div>
+          <div class="tokens-stat-label">fewer tokens per dependency loop</div>
+        </div>
+        <div class="tokens-stat-divider"></div>
+        <div class="tokens-stat">
+          <div class="tokens-stat-num">1<span class="tokens-stat-pct">x</span></div>
+          <div class="tokens-stat-label">round-trip instead of 4+</div>
+        </div>
+        <div class="tokens-stat-divider"></div>
+        <div class="tokens-stat">
+          <div class="tokens-stat-num">0</div>
+          <div class="tokens-stat-label">manual pip/npm installs needed</div>
         </div>
       </div>
     </div>
