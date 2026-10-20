@@ -186,8 +186,10 @@
     <div class="flex items-center gap-2">
       <span class="text-xl">🛡️</span>
       <span class="font-display font-bold text-lg text-on-surface">Underhood</span>
+      <span class="text-[11px] font-mono bg-primary/15 text-primary border border-primary/30 rounded-full px-2 py-0.5 ml-1">v0.3.0</span>
     </div>
     <div class="hidden md:flex items-center gap-6">
+      <a class="text-sm text-primary font-medium hover:text-primary transition-colors flex items-center gap-1.5" href="#updates"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>What's New</a>
       <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#features">Features</a>
       <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#preview">Preview</a>
       <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#token-savings">Token Savings</a>
@@ -256,9 +258,11 @@
 
   <!-- Hero Content -->
   <div class="relative z-10 w-full max-w-5xl mx-auto text-center flex flex-col items-center gap-6 stagger-1">
-    <div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/25 rounded-full px-4 py-1.5 text-sm text-primary font-medium mb-2">
-      ✨ v0.2.0 — Secrets Scan Released
-    </div>
+    <a href="#updates" class="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 hover:border-primary/60 rounded-full px-4 py-1.5 text-sm text-primary font-medium mb-2 transition-all group">
+      <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+      <span>✨ v0.3.0 Released — Multi-Runtime Engine & Zero-Trust Sandbox</span>
+      <span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+    </a>
 
     <h1 class="font-display font-bold text-[56px] md:text-[72px] leading-[1.05] tracking-tight">
       <span class="text-gradient">Zero-Effort Runner</span><br/>
@@ -266,33 +270,169 @@
     </h1>
 
     <p class="text-lg md:text-xl text-on-surface-variant max-w-3xl mx-auto leading-relaxed">
-      Auto-detect runtimes, install missing dependencies in a secure sandbox, scan for malware with Windows Defender, and audit for leaked secrets — all in one tool.
+      Self-repairing execution loop across <strong>10 languages</strong> (Python, Node, TypeScript, Go, Rust, .NET, Ruby, PHP, PowerShell, Lua). Auto-installs missing dependencies in sandboxed workspaces with anti-confusion protection.
     </p>
 
-    <div class="flex flex-wrap items-center justify-center gap-3 w-full max-w-2xl">
-      <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/UnderhoodInstaller.msi" class="btn-primary font-semibold px-6 py-3 rounded-xl flex items-center gap-2 text-sm">
-        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">download</span> MSI Installer
+    <div class="flex flex-wrap items-center justify-center gap-3 w-full max-w-3xl">
+      <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/UnderhoodInstaller.msi" class="btn-primary font-semibold px-5 py-3 rounded-xl flex items-center gap-2 text-sm shadow-lg shadow-primary/20">
+        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">download</span> Windows MSI
       </a>
-      <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/Underhood-Portable.zip" class="btn-ghost px-6 py-3 rounded-xl flex items-center gap-2 text-sm">
-        <span class="material-symbols-outlined text-[18px]">folder_zip</span> Portable ZIP
+      <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/Underhood-Portable.zip" class="btn-ghost px-5 py-3 rounded-xl flex items-center gap-2 text-sm">
+        <span class="material-symbols-outlined text-[18px]">folder_zip</span> Windows Portable
       </a>
-      <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/underhood-0.2.0.vsix" class="btn-ghost px-6 py-3 rounded-xl flex items-center gap-2 text-sm">
-        <span class="material-symbols-outlined text-[18px]">extension</span> VS Code / Cursor / Windsurf Ext
+      <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/Underhood-macOS.zip" class="btn-ghost px-5 py-3 rounded-xl flex items-center gap-2 text-sm">
+        <span class="material-symbols-outlined text-[18px]">laptop_mac</span> macOS App
+      </a>
+      <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/underhood-0.3.0.vsix" class="btn-ghost px-5 py-3 rounded-xl flex items-center gap-2 text-sm border-secondary/40 text-secondary hover:border-secondary">
+        <span class="material-symbols-outlined text-[18px]">extension</span> VS Code / Cursor Ext
       </a>
     </div>
 
     <!-- Platform Badges -->
-    <div class="flex flex-wrap items-center justify-center gap-5 mt-4 pt-5 border-t border-white/8 opacity-75 text-sm text-on-surface-variant">
+    <div class="flex flex-wrap items-center justify-center gap-4 mt-4 pt-5 border-t border-white/8 opacity-80 text-sm text-on-surface-variant">
       <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">desktop_windows</span> Windows 10/11</span>
+      <span class="text-outline-variant">•</span>
+      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">laptop_mac</span> macOS 12+ (Universal)</span>
       <span class="text-outline-variant">•</span>
       <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">code</span> VS Code</span>
       <span class="text-outline-variant">•</span>
       <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">terminal</span> Cursor</span>
       <span class="text-outline-variant">•</span>
       <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">waves</span> Windsurf</span>
+      <span class="text-outline-variant">•</span>
+      <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">smart_toy</span> MCP Server for AI Agents</span>
     </div>
   </div>
 </header>
+
+<!-- ── WHAT'S NEW IN v0.3.0 (UPDATE NEWS) ────────────────────────────── -->
+<section class="py-16 px-6 relative z-10" id="updates">
+  <div class="max-w-7xl mx-auto">
+    <div class="glass-panel-heavy rounded-3xl p-8 md:p-12 border border-primary/30 shadow-[0_0_60px_rgba(78,222,163,0.12)] relative overflow-hidden">
+      <!-- Ambient Glow decoration -->
+      <div class="absolute -top-32 -right-32 w-[450px] h-[450px] bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-32 -left-32 w-[450px] h-[450px] bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
+      
+      <div class="relative z-10 flex flex-col gap-8">
+        <!-- Release Header Banner -->
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="px-3.5 py-1 bg-primary/20 border border-primary/50 rounded-full text-xs font-bold text-primary tracking-wide uppercase flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span> MAJOR UPDATE
+            </span>
+            <span class="text-sm font-display font-semibold text-on-surface">Underhood v0.3.0</span>
+            <span class="text-xs text-on-surface-variant font-mono">• October 2026 Stable</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <a href="https://github.com/aomerow1-del/underhood-releases/releases/tag/v0.3.0" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs text-primary hover:underline font-medium">
+              Full Release Notes on GitHub <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="font-display font-bold text-3xl md:text-5xl text-on-surface mb-4 leading-tight">
+            What's New in v0.3.0: <span class="text-gradient">Multi-Runtime Self-Repair</span> & Strict Sandboxing
+          </h2>
+          <p class="text-on-surface-variant text-base md:text-lg max-w-3xl leading-relaxed">
+            The biggest upgrade to Underhood yet. Run, repair, and sandbox code across 10 programming languages with zero virtualenv setup, automated protection against dependency confusion, reproducible lockfiles, and direct AI agent integration.
+          </p>
+        </div>
+
+        <!-- 4 Key Innovation Highlights Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 pt-2">
+          <!-- Card 1 -->
+          <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-primary/40 transition-all flex flex-col gap-3">
+            <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/25 flex items-center justify-center text-primary text-xl">
+              ⚡
+            </div>
+            <h3 class="font-display font-semibold text-base text-on-surface">10 Self-Repairing Runtimes</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed">
+              Auto-interception of missing libraries for <strong>Python, Node, TypeScript (Bun/Deno), Go, Rust, .NET/C#, Ruby, PHP, PowerShell</strong>, and <strong>Lua</strong>.
+            </p>
+            <div class="mt-auto pt-2 flex flex-wrap gap-1 text-[10px] font-mono text-primary/80">
+              <span class="bg-primary/10 px-1.5 py-0.5 rounded">Python</span>
+              <span class="bg-primary/10 px-1.5 py-0.5 rounded">TS/Bun</span>
+              <span class="bg-primary/10 px-1.5 py-0.5 rounded">Go</span>
+              <span class="bg-primary/10 px-1.5 py-0.5 rounded">Rust</span>
+              <span class="bg-primary/10 px-1.5 py-0.5 rounded">C#</span>
+              <span class="bg-primary/10 px-1.5 py-0.5 rounded">Ruby</span>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-secondary/40 transition-all flex flex-col gap-3">
+            <div class="w-10 h-10 rounded-xl bg-secondary/10 border border-secondary/25 flex items-center justify-center text-secondary text-xl">
+              🛡️
+            </div>
+            <h3 class="font-display font-semibold text-base text-on-surface">Anti-Dependency Confusion</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed">
+              New <code>is_local_module</code> guardian stops public registry downloads of local workspace files. Deep <code>IMPORT_ALIAS_MAP</code> resolves imports like <code>PIL</code> → <code>Pillow</code> and <code>cv2</code> → <code>opencv-python</code>.
+            </p>
+            <div class="mt-auto pt-2 flex flex-wrap gap-1 text-[10px] font-mono text-secondary/80">
+              <span class="bg-secondary/10 px-1.5 py-0.5 rounded">Zero Shadowing</span>
+              <span class="bg-secondary/10 px-1.5 py-0.5 rounded">Canonical Map</span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-primary/40 transition-all flex flex-col gap-3">
+            <div class="w-10 h-10 rounded-xl bg-primary/10 border border-primary/25 flex items-center justify-center text-primary text-xl">
+              📦
+            </div>
+            <h3 class="font-display font-semibold text-base text-on-surface">Isolated Sandboxes & Lockfiles</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed">
+              Auto-installed packages live safely in local sandbox folders (<code>.underhood_libs</code>, <code>.underhood_gems</code>, <code>lua_modules</code>). Tracks every dependency in <code>underhood.lock.json</code> with 1-click clean.
+            </p>
+            <div class="mt-auto pt-2 flex flex-wrap gap-1 text-[10px] font-mono text-primary/80">
+              <span class="bg-primary/10 px-1.5 py-0.5 rounded">Lockfile</span>
+              <span class="bg-primary/10 px-1.5 py-0.5 rounded">--export-manifest</span>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-secondary/40 transition-all flex flex-col gap-3">
+            <div class="w-10 h-10 rounded-xl bg-secondary/10 border border-secondary/25 flex items-center justify-center text-secondary text-xl">
+              🤖
+            </div>
+            <h3 class="font-display font-semibold text-base text-on-surface">AI Agent MCP Server Tools</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed">
+              Claude Desktop, Cursor, and Windsurf can natively invoke <code>analyze_project</code>, <code>run_code_with_repair</code>, <code>clean_sandbox</code>, and <code>export_manifest</code> without burning context tokens.
+            </p>
+            <div class="mt-auto pt-2 flex flex-wrap gap-1 text-[10px] font-mono text-secondary/80">
+              <span class="bg-secondary/10 px-1.5 py-0.5 rounded">Claude</span>
+              <span class="bg-secondary/10 px-1.5 py-0.5 rounded">Cursor</span>
+              <span class="bg-secondary/10 px-1.5 py-0.5 rounded">Windsurf</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download Banner inside update box -->
+        <div class="bg-surface-container-low/80 rounded-2xl p-6 border border-white/8 flex flex-col md:flex-row items-center justify-between gap-4 mt-2">
+          <div class="flex items-center gap-4">
+            <span class="text-3xl">🚀</span>
+            <div>
+              <div class="font-display font-semibold text-base text-on-surface">Download Underhood v0.3.0</div>
+              <div class="text-xs text-on-surface-variant">Available for Windows, macOS (Universal), and VS Code / Cursor / Windsurf.</div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 w-full md:w-auto">
+            <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/UnderhoodInstaller.msi" class="btn-primary text-xs font-semibold px-4 py-2.5 rounded-lg flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[15px]" style="font-variation-settings:'FILL' 1">download</span> Windows MSI
+            </a>
+            <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/Underhood-macOS.zip" class="btn-ghost text-xs px-4 py-2.5 rounded-lg flex items-center gap-1.5">
+              <span class="material-symbols-outlined text-[15px]">laptop_mac</span> macOS App
+            </a>
+            <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/underhood-0.3.0.vsix" class="btn-ghost text-xs px-4 py-2.5 rounded-lg flex items-center gap-1.5 border-secondary/40 text-secondary">
+              <span class="material-symbols-outlined text-[15px]">extension</span> VSIX (0.3.0)
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ── SCAN IN ACTION ──────────────────────────────────────────────────── -->
 <section class="py-20 px-6 relative z-10" id="preview">
@@ -339,10 +479,10 @@
         </div>
         <!-- Right: Terminal -->
         <div class="flex-1 terminal-bg p-5 font-mono text-sm overflow-x-auto">
-          <div class="text-on-surface-variant/50 mb-3 text-xs">Underhood v0.2.0 initialized — scanning main.py</div>
-          <div class="flex gap-2 mb-1.5"><span class="text-secondary">&gt;&gt;</span><span class="text-on-surface-variant">Detecting runtime...</span><span class="text-primary ml-auto">Python 3.11 ✓</span></div>
-          <div class="flex gap-2 mb-1.5"><span class="text-secondary">&gt;&gt;</span><span class="text-on-surface-variant">Scanning imports...</span></div>
-          <div class="flex gap-2 mb-1.5"><span class="text-primary">✓</span><span class="text-on-surface-variant">Dependencies resolved: numpy, requests, bs4</span></div>
+          <div class="text-on-surface-variant/50 mb-3 text-xs">Underhood v0.3.0 initialized — Multi-Runtime Zero-Trust Engine</div>
+          <div class="flex gap-2 mb-1.5"><span class="text-secondary">&gt;&gt;</span><span class="text-on-surface-variant">Detecting runtime...</span><span class="text-primary ml-auto">TypeScript (Bun) / Python 3.11 ✓</span></div>
+          <div class="flex gap-2 mb-1.5"><span class="text-secondary">&gt;&gt;</span><span class="text-on-surface-variant">Resolving imports & aliases...</span><span class="text-primary ml-auto">PIL → Pillow ✓</span></div>
+          <div class="flex gap-2 mb-1.5"><span class="text-primary">✓</span><span class="text-on-surface-variant">Dependencies sandboxed (.underhood_libs) & pinned</span></div>
           <div class="flex gap-2 mb-1.5"><span class="text-primary">✓</span><span class="text-on-surface-variant">Malware scan clear — 0 threats</span></div>
           <div class="flex gap-2 mb-3"><span class="text-[#fbbc04]">⚠</span><span class="text-[#fbbc04]">Scanning for secrets and credentials...</span></div>
           <!-- Leak card -->
@@ -561,48 +701,68 @@
 
 <!-- ── INSTALL ────────────────────────────────────────────────────────── -->
 <section class="py-20 px-6 relative z-10 bg-surface-container-low/20 border-t border-white/5" id="install">
-  <div class="max-w-5xl mx-auto">
+  <div class="max-w-6xl mx-auto">
     <div class="text-center mb-14">
-      <h2 class="font-display font-bold text-4xl text-on-surface mb-3">Get Started</h2>
-      <p class="text-on-surface-variant text-lg">One download. Zero setup headaches.</p>
+      <h2 class="font-display font-bold text-4xl text-on-surface mb-3">Get Started with v0.3.0</h2>
+      <p class="text-on-surface-variant text-lg">Cross-platform releases for Windows, macOS, and IDEs. Zero setup headaches.</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Desktop App -->
-      <div class="glass-panel p-7 rounded-2xl neon-card flex flex-col gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Windows Desktop App -->
+      <div class="glass-panel p-6 rounded-2xl neon-card flex flex-col gap-4">
         <div class="flex items-center gap-3">
           <div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/25 flex items-center justify-center">
             <span class="material-symbols-outlined text-primary text-[24px]">desktop_windows</span>
           </div>
           <div>
-            <div class="font-display font-semibold text-lg text-on-surface">Desktop App</div>
-            <div class="text-xs text-on-surface-variant">Windows 10/11 · ~22 MB</div>
+            <div class="font-display font-semibold text-lg text-on-surface">Windows App</div>
+            <div class="text-xs text-on-surface-variant">Windows 10 / 11 (64-bit)</div>
           </div>
         </div>
-        <p class="text-on-surface-variant text-sm leading-relaxed">Full standalone app with drag-and-drop support, history, starter kits, and AI tools panel.</p>
+        <p class="text-on-surface-variant text-xs leading-relaxed">Full standalone WinForms application with drag-and-drop workspace analysis, log viewer, and background execution controller.</p>
         <div class="flex flex-col gap-2 mt-auto">
-          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/UnderhoodInstaller.msi" class="btn-primary px-5 py-3 rounded-xl text-sm font-semibold text-center flex items-center justify-center gap-2">
-            <span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1">download</span> Download MSI Installer
+          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/UnderhoodInstaller.msi" class="btn-primary px-4 py-2.5 rounded-xl text-xs font-semibold text-center flex items-center justify-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1">download</span> MSI Installer (~24 MB)
           </a>
-          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/Underhood-Portable.zip" class="btn-ghost px-5 py-3 rounded-xl text-sm font-medium text-center flex items-center justify-center gap-2">
-            <span class="material-symbols-outlined text-[17px]">folder_zip</span> Portable ZIP (no install)
+          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/Underhood-Portable.zip" class="btn-ghost px-4 py-2.5 rounded-xl text-xs font-medium text-center flex items-center justify-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">folder_zip</span> Portable ZIP (~36 MB)
           </a>
         </div>
       </div>
-      <!-- Extension -->
-      <div class="glass-panel p-7 rounded-2xl neon-card-cyan flex flex-col gap-5">
+
+      <!-- macOS App -->
+      <div class="glass-panel p-6 rounded-2xl neon-card-cyan flex flex-col gap-4">
         <div class="flex items-center gap-3">
           <div class="w-12 h-12 rounded-xl bg-secondary/10 border border-secondary/25 flex items-center justify-center">
-            <span class="material-symbols-outlined text-secondary text-[24px]">extension</span>
+            <span class="material-symbols-outlined text-secondary text-[24px]">laptop_mac</span>
+          </div>
+          <div>
+            <div class="font-display font-semibold text-lg text-on-surface">macOS App</div>
+            <div class="text-xs text-on-surface-variant">macOS 12+ Universal</div>
+          </div>
+        </div>
+        <p class="text-on-surface-variant text-xs leading-relaxed">Native SwiftUI application built for Apple Silicon (M1/M2/M3/M4) and Intel Macs with embedded Python sidecar runner.</p>
+        <div class="flex flex-col gap-2 mt-auto">
+          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/Underhood-macOS.zip" class="btn-ghost px-4 py-2.5 rounded-xl text-xs font-semibold text-center flex items-center justify-center gap-1.5 border-secondary/40 text-secondary hover:border-secondary">
+            <span class="material-symbols-outlined text-[16px]">download</span> Underhood-macOS.zip (~9 MB)
+          </a>
+        </div>
+      </div>
+
+      <!-- IDE Extension -->
+      <div class="glass-panel p-6 rounded-2xl neon-card flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 border border-primary/25 flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary text-[24px]">extension</span>
           </div>
           <div>
             <div class="font-display font-semibold text-lg text-on-surface">IDE Extension</div>
             <div class="text-xs text-on-surface-variant">VS Code · Cursor · Windsurf</div>
           </div>
         </div>
-        <p class="text-on-surface-variant text-sm leading-relaxed">Install via <strong class="text-on-surface">Extensions → Install from VSIX</strong> in your editor. Works across all three editors with identical UX.</p>
+        <p class="text-on-surface-variant text-xs leading-relaxed">Run and audit scripts inline inside your editor. Install via <strong class="text-on-surface">Extensions → Install from VSIX...</strong>.</p>
         <div class="flex flex-col gap-2 mt-auto">
-          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/underhood-0.2.0.vsix" class="btn-ghost px-5 py-3 rounded-xl text-sm font-semibold text-center flex items-center justify-center gap-2 border-secondary/30 hover:border-secondary/60">
-            <span class="material-symbols-outlined text-[17px]">extension</span> Download VSIX Extension
+          <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/underhood-0.3.0.vsix" class="btn-ghost px-4 py-2.5 rounded-xl text-xs font-semibold text-center flex items-center justify-center gap-1.5 border-primary/40 text-primary hover:border-primary">
+            <span class="material-symbols-outlined text-[16px]">extension</span> Download VSIX (v0.3.0)
           </a>
         </div>
       </div>

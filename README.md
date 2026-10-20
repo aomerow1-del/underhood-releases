@@ -44,21 +44,24 @@ A standalone, lightweight C# desktop application where you can drag-and-drop pro
 
 ## 📥 Download & Installation
 
-Underhood is distributed as pre-compiled installers and extensions. To download and install the software, please refer to the **Releases** page on GitHub:
+Underhood is distributed as pre-compiled installers and extensions. To download and install the software, please refer to the **[Releases](https://github.com/aomerow1-del/underhood-releases/releases)** page on GitHub:
 
 ### 1. Standalone Windows Desktop Application
 * Navigate to the latest release on our GitHub Releases page.
 * Download the appropriate installer or bundle:
   * **MSI Installer**: `UnderhoodInstaller.msi`
-  * **EXE Installer**: `UnderhoodInstaller.exe`
   * **Portable Zip**: `Underhood-Portable.zip`
 * Run the installer file to complete the setup or extract the portable ZIP.
 
-### 2. VS Code Extension
-* Download the packaged extension file (`underhood-0.2.0.vsix`) from the latest release page.
+### 2. Standalone macOS Application
+* Download `Underhood-macOS.zip` from GitHub Releases.
+* Unzip and drag `Underhood.app` into your `Applications/` folder.
+
+### 3. VS Code / Cursor / Windsurf Extension
+* Download the packaged extension file (`underhood-0.3.0.vsix`) from the latest release page.
 * Open VS Code, open the Extensions side panel (`Ctrl+Shift+X` or `Cmd+Shift+X`).
 * Click the menu icon (`...`) in the top-right corner of the Extensions view and select **Install from VSIX...**.
-* Select the downloaded `.vsix` file to install it directly.
+* Select `underhood-0.3.0.vsix` to install it directly.
 
 ---
 
