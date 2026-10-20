@@ -88,54 +88,55 @@
     }
 
     .neon-card {
-        transition: all 0.3s ease;
-        border: 1px solid rgba(78, 222, 163, 0.12);
-        box-shadow: 0 0 0 0 rgba(78, 222, 163, 0);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
     .neon-card:hover {
-        border-color: rgba(78, 222, 163, 0.4);
-        box-shadow: 0 0 25px rgba(78, 222, 163, 0.12);
-        transform: translateY(-4px);
+        border-color: rgba(78, 222, 163, 0.3);
+        box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.6);
+        transform: translateY(-2px);
     }
     .neon-card-cyan {
-        transition: all 0.3s ease;
-        border: 1px solid rgba(76, 215, 246, 0.12);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
     .neon-card-cyan:hover {
-        border-color: rgba(76, 215, 246, 0.4);
-        box-shadow: 0 0 25px rgba(76, 215, 246, 0.12);
-        transform: translateY(-4px);
+        border-color: rgba(76, 215, 246, 0.3);
+        box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.6);
+        transform: translateY(-2px);
     }
 
     .btn-primary {
-        background: linear-gradient(135deg, #10b981, #4cd7f6);
-        color: #fff;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        border: 1px solid transparent;
+        background: #4edea3;
+        color: #032115;
+        font-weight: 700;
+        transition: all 0.2s ease;
+        border: 1px solid #6ffbbe;
     }
     .btn-primary:hover {
-        box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
-        transform: translateY(-2px);
+        background: #6ffbbe;
+        color: #001f13;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        transform: translateY(-1px);
     }
     .btn-ghost {
-        background: transparent;
-        border: 1px solid rgba(255,255,255,0.12);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
         color: #dde4dd;
         font-weight: 500;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
     }
     .btn-ghost:hover {
-        background: rgba(255,255,255,0.06);
-        border-color: rgba(78,222,163,0.35);
-        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.25);
+        color: #ffffff;
+        transform: translateY(-1px);
     }
 
     .text-gradient {
-        background: linear-gradient(135deg, #4edea3, #4cd7f6);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: #4edea3;
     }
 
     .terminal-bg { background-color: #020408; }
@@ -149,8 +150,8 @@
         to   { opacity: 1; transform: translateY(0); }
     }
     @keyframes pulseGlow {
-        0%, 100% { box-shadow: 0 0 5px rgba(78,222,163,0.4); }
-        50%       { box-shadow: 0 0 15px rgba(78,222,163,0.8); }
+        0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+        50%       { box-shadow: 0 4px 12px rgba(0,0,0,0.6); }
     }
     @keyframes ping-slow {
         0%   { transform: scale(1);   opacity: 0.8; }
@@ -175,7 +176,7 @@
 
     /* Toggle switch visuals */
     .toggle-on { background: rgba(78,222,163,0.15); border-color: rgba(78,222,163,0.5); }
-    .toggle-dot { box-shadow: 0 0 8px rgba(78,222,163,0.8); }
+    .toggle-dot { box-shadow: 0 2px 6px rgba(0,0,0,0.5); }
 </style>
 </head>
 <body class="antialiased">
@@ -189,9 +190,11 @@
       <span class="text-[11px] font-mono bg-primary/15 text-primary border border-primary/30 rounded-full px-2 py-0.5 ml-1">v0.3.0</span>
     </div>
     <div class="hidden md:flex items-center gap-6">
-      <a class="text-sm text-primary font-medium hover:text-primary transition-colors flex items-center gap-1.5" href="#updates"><span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>What's New</a>
+      <a class="text-sm text-primary font-medium hover:text-primary transition-colors flex items-center gap-1.5" href="#updates"><span class="w-1.5 h-1.5 rounded-full bg-primary "></span>What's New</a>
+      <a class="text-sm text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="#demo-video"><span class="material-symbols-outlined text-[15px] text-secondary">play_circle</span>Video Tour</a>
       <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#features">Features</a>
       <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#preview">Preview</a>
+      <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#gallery">Gallery</a>
       <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#token-savings">Token Savings</a>
       <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#how-it-works">How It Works</a>
       <a class="text-sm text-on-surface-variant hover:text-primary transition-colors" href="#install">Install</a>
@@ -259,7 +262,7 @@
   <!-- Hero Content -->
   <div class="relative z-10 w-full max-w-5xl mx-auto text-center flex flex-col items-center gap-6 stagger-1">
     <a href="#updates" class="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 hover:border-primary/60 rounded-full px-4 py-1.5 text-sm text-primary font-medium mb-2 transition-all group">
-      <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+      <span class="w-2 h-2 rounded-full bg-primary "></span>
       <span>✨ v0.3.0 Released — Multi-Runtime Engine & Zero-Trust Sandbox</span>
       <span class="material-symbols-outlined text-[16px] group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
     </a>
@@ -284,7 +287,10 @@
         <span class="material-symbols-outlined text-[18px]">laptop_mac</span> macOS App
       </a>
       <a href="https://github.com/aomerow1-del/underhood-releases/releases/latest/download/underhood-0.3.0.vsix" class="btn-ghost px-5 py-3 rounded-xl flex items-center gap-2 text-sm border-secondary/40 text-secondary hover:border-secondary">
-        <span class="material-symbols-outlined text-[18px]">extension</span> VS Code / Cursor Ext
+        <span class="material-symbols-outlined text-[18px]">extension</span> VS Code Ext
+      </a>
+      <a href="#demo-video" class="btn-ghost px-5 py-3 rounded-xl flex items-center gap-2 text-sm border-primary/40 text-primary hover:bg-primary/10">
+        <span class="material-symbols-outlined text-[18px]">play_circle</span> Watch 24s Demo
       </a>
     </div>
 
@@ -308,7 +314,7 @@
 <!-- ── WHAT'S NEW IN v0.3.0 (UPDATE NEWS) ────────────────────────────── -->
 <section class="py-16 px-6 relative z-10" id="updates">
   <div class="max-w-7xl mx-auto">
-    <div class="glass-panel-heavy rounded-3xl p-8 md:p-12 border border-primary/30 shadow-[0_0_60px_rgba(78,222,163,0.12)] relative overflow-hidden">
+    <div class="glass-panel-heavy rounded-3xl p-8 md:p-12 border border-primary/30 shadow-2xl relative overflow-hidden">
       <!-- Ambient Glow decoration -->
       <div class="absolute -top-32 -right-32 w-[450px] h-[450px] bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute -bottom-32 -left-32 w-[450px] h-[450px] bg-secondary/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -318,7 +324,7 @@
         <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
           <div class="flex flex-wrap items-center gap-3">
             <span class="px-3.5 py-1 bg-primary/20 border border-primary/50 rounded-full text-xs font-bold text-primary tracking-wide uppercase flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span> MAJOR UPDATE
+              <span class="w-1.5 h-1.5 rounded-full bg-primary "></span> MAJOR UPDATE
             </span>
             <span class="text-sm font-display font-semibold text-on-surface">Underhood v0.3.0</span>
             <span class="text-xs text-on-surface-variant font-mono">• October 2026 Stable</span>
@@ -407,23 +413,6 @@
           </div>
         </div>
 
-        <!-- Video Demo Showcase -->
-        <div class="mt-2 rounded-2xl overflow-hidden border border-primary/30 shadow-[0_0_35px_rgba(78,222,163,0.12)] bg-black/70">
-          <div class="px-5 py-3 bg-surface-container-low/90 border-b border-white/5 flex items-center justify-between text-xs">
-            <span class="font-mono text-primary flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-              Demo: Underhood v0.3.0 Autonomous Multi-Runtime Self-Repair
-            </span>
-            <span class="text-on-surface-variant font-mono">1080p HD • 24s</span>
-          </div>
-          <div class="relative w-full aspect-video bg-black">
-            <video controls preload="metadata" class="w-full h-full object-contain" poster="media/underhood_v030_demo_poster.png">
-              <source src="media/underhood_v030_demo.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-
         <!-- Download Banner inside update box -->
         <div class="bg-surface-container-low/80 rounded-2xl p-6 border border-white/8 flex flex-col md:flex-row items-center justify-between gap-4 mt-2">
           <div class="flex items-center gap-4">
@@ -464,9 +453,9 @@
       <!-- Title bar -->
       <div class="bg-surface-container/60 px-4 py-3 flex items-center gap-3 border-b border-white/10">
         <div class="flex gap-1.5">
-          <div class="w-3 h-3 rounded-full bg-error shadow-[0_0_6px_#ffb4ab]"></div>
+          <div class="w-3 h-3 rounded-full bg-error shadow-sm"></div>
           <div class="w-3 h-3 rounded-full bg-[#fbbc04]"></div>
-          <div class="w-3 h-3 rounded-full bg-primary shadow-[0_0_6px_#4edea3]"></div>
+          <div class="w-3 h-3 rounded-full bg-primary shadow-sm"></div>
         </div>
         <div class="flex-1 text-center font-mono text-xs text-on-surface-variant">underhood-agent.exe — main.py</div>
       </div>
@@ -504,7 +493,7 @@
           <div class="flex gap-2 mb-3"><span class="text-[#fbbc04]">⚠</span><span class="text-[#fbbc04]">Scanning for secrets and credentials...</span></div>
           <!-- Leak card -->
           <div class="border border-error/40 bg-error/8 rounded-lg p-3 relative overflow-hidden">
-            <div class="absolute left-0 top-0 w-1 h-full bg-error shadow-[0_0_10px_#ffb4ab]"></div>
+            <div class="absolute left-0 top-0 w-1 h-full bg-error shadow-sm"></div>
             <div class="flex items-center gap-2 text-error font-bold text-xs mb-2 ml-2">
               <span class="material-symbols-outlined text-[15px]">warning</span> HIGH SEVERITY — CREDENTIAL LEAK DETECTED
             </div>
@@ -513,38 +502,226 @@
               <span class="text-on-surface-variant/60">Line 16:</span> <span class="text-error">AWS_SECRET_KEY = "<span class="blur-sm select-none">AKIAIOSFODNN7EXAMPLE</span>"</span>
             </div>
           </div>
-          <div class="flex items-center gap-1 mt-3 text-secondary"><span class="animate-pulse">_</span></div>
+          <div class="flex items-center gap-1 mt-3 text-secondary"><span class="">_</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── APP PREVIEWS ───────────────────────────────────────────────────── -->
-<section class="py-20 px-6 relative z-10 bg-surface-container-low/20 border-y border-white/5">
+<!-- ── PRODUCT DEMO VIDEO (HYPERFRAMES) ──────────────────────────────── -->
+<section class="py-20 px-6 relative z-10 border-t border-white/5 bg-gradient-to-b from-surface/40 via-surface-container-low/30 to-surface/40" id="demo-video">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/30 rounded-full px-4 py-1 text-xs text-primary font-semibold uppercase tracking-wider mb-3">
+        <span class="w-2 h-2 rounded-full bg-primary "></span>
+        HyperFrames Cinematic Demo
+      </div>
+      <h2 class="font-display font-bold text-4xl md:text-5xl text-on-surface mb-3">
+        Watch Underhood <span class="text-gradient">v0.3.0</span> in Action
+      </h2>
+      <p class="text-on-surface-variant text-base md:text-lg max-w-2xl mx-auto">
+        A 24-second tour of autonomous dependency self-repair, Windows Defender pre-flight malware blocking, and the refreshed Impeccable multi-platform experience.
+      </p>
+    </div>
+
+    <!-- Video Player Container with Window Frame -->
+    <div class="glass-panel-heavy rounded-2xl overflow-hidden border border-white/15 shadow-2xl max-w-5xl mx-auto neon-card">
+      <div class="bg-surface-container/80 px-4 py-3 flex items-center justify-between border-b border-white/10">
+        <div class="flex items-center gap-2">
+          <div class="w-3 h-3 rounded-full bg-error"></div>
+          <div class="w-3 h-3 rounded-full bg-[#fbbc04]"></div>
+          <div class="w-3 h-3 rounded-full bg-primary"></div>
+          <span class="font-mono text-xs text-on-surface-variant ml-2">underhood_hyperframe_demo.mp4 (1080p 30fps)</span>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-primary font-mono bg-primary/10 px-2.5 py-0.5 rounded-full border border-primary/20">
+          <span>Stereo AAC</span>
+          <span>•</span>
+          <span>24s Demo</span>
+        </div>
+      </div>
+      <div class="relative bg-black aspect-video flex items-center justify-center overflow-hidden">
+        <video 
+          id="hyperframes-video-player"
+          controls
+          playsinline
+          loop
+          poster="desktop_preview.png"
+          class="w-full h-full object-contain"
+        >
+          <source src="underhood_hyperframe_demo.mp4" type="video/mp4" />
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+      <div class="p-4 bg-surface-container-low/70 border-t border-white/8 flex flex-wrap items-center justify-between gap-3 text-xs text-on-surface-variant">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="flex items-center gap-1.5 text-on-surface"><span class="material-symbols-outlined text-primary text-[16px]">verified</span> Rendered with HyperFrames</span>
+          <span class="hidden sm:inline">•</span>
+          <span class="hidden sm:inline">Deterministic GSAP Timeline</span>
+          <span class="hidden sm:inline">•</span>
+          <span class="hidden sm:inline">WCAG AA Contrast Verified</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="underhood_hyperframe_demo.mp4" download class="text-primary hover:underline flex items-center gap-1 font-medium">
+            <span class="material-symbols-outlined text-[15px]">download</span> Download MP4 (7.4 MB)
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── APP PREVIEWS (TRIPLE PLATFORM) ─────────────────────────────────── -->
+<section class="py-20 px-6 relative z-10 bg-surface-container-low/20 border-y border-white/5" id="preview-apps">
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-14">
-      <h2 class="font-display font-bold text-4xl text-on-surface mb-3">App Previews</h2>
-      <p class="text-on-surface-variant text-lg">Available as a desktop app or IDE extension</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <!-- Desktop App -->
-      <div class="glass-panel rounded-2xl overflow-hidden neon-card">
-        <div class="p-4 border-b border-white/10 flex items-center gap-3">
-          <span class="material-symbols-outlined text-primary">desktop_windows</span>
-          <span class="font-semibold text-on-surface">Desktop Application</span>
-          <span class="ml-auto text-xs bg-primary/10 text-primary border border-primary/20 rounded-full px-2 py-0.5">Windows</span>
-        </div>
-        <img src="desktop_preview.png" alt="Underhood Desktop Application preview" class="w-full object-cover"/>
+      <div class="inline-flex items-center gap-1.5 bg-secondary/10 border border-secondary/25 rounded-full px-3 py-1 text-xs text-secondary font-medium mb-3">
+        Triple-Platform Architecture
       </div>
-      <!-- VS Code Extension -->
-      <div class="glass-panel rounded-2xl overflow-hidden neon-card-cyan">
-        <div class="p-4 border-b border-white/10 flex items-center gap-3">
-          <span class="material-symbols-outlined text-secondary">extension</span>
-          <span class="font-semibold text-on-surface">VS Code / Cursor / Windsurf</span>
-          <span class="ml-auto text-xs bg-secondary/10 text-secondary border border-secondary/20 rounded-full px-2 py-0.5">VSIX</span>
+      <h2 class="font-display font-bold text-4xl text-on-surface mb-3">One Engine. Three Native Experiences.</h2>
+      <p class="text-on-surface-variant text-lg max-w-2xl mx-auto">Impeccable UI/UX refined specifically for Windows, macOS, and IDE extension workflows.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Windows Desktop App -->
+      <div class="glass-panel rounded-2xl overflow-hidden neon-card flex flex-col">
+        <div class="p-4 border-b border-white/10 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <span class="text-xl">🪟</span>
+            <span class="font-semibold text-on-surface text-sm">Windows Client</span>
+          </div>
+          <span class="text-xs bg-primary/10 text-primary border border-primary/20 rounded-full px-2.5 py-0.5 font-medium">C# Fluent UI</span>
         </div>
-        <img src="vscode_preview.png" alt="Underhood VS Code Extension preview" class="w-full object-cover"/>
+        <div class="bg-black/40 overflow-hidden flex-1 group">
+          <img src="desktop_preview.png" alt="Underhood Windows Desktop Application" class="w-full h-56 object-cover object-top transition-transform duration-300 group-hover:scale-105"/>
+        </div>
+        <div class="p-4 bg-surface-container-low/50 border-t border-white/5 text-xs text-on-surface-variant flex flex-col gap-2">
+          <div class="font-semibold text-on-surface text-sm">Fluent Dark UI & Defender Hook</div>
+          <p class="leading-relaxed">Native WinForms with modern fluent dark theme, Windows Defender API malware guard, and instant Roslyn compilation.</p>
+        </div>
+      </div>
+
+      <!-- macOS Native App -->
+      <div class="glass-panel rounded-2xl overflow-hidden neon-card flex flex-col">
+        <div class="p-4 border-b border-white/10 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <span class="text-xl">🍏</span>
+            <span class="font-semibold text-on-surface text-sm">macOS Client</span>
+          </div>
+          <span class="text-xs bg-[#c084fc]/15 text-[#c084fc] border border-[#c084fc]/30 rounded-full px-2.5 py-0.5 font-medium">SwiftUI Native</span>
+        </div>
+        <div class="bg-black/40 overflow-hidden flex-1 group">
+          <img src="macos_preview.png" alt="Underhood macOS Native SwiftUI Application" class="w-full h-56 object-cover object-top transition-transform duration-300 group-hover:scale-105"/>
+        </div>
+        <div class="p-4 bg-surface-container-low/50 border-t border-white/5 text-xs text-on-surface-variant flex flex-col gap-2">
+          <div class="font-semibold text-on-surface text-sm">SwiftUI & SF Symbols</div>
+          <p class="leading-relaxed">Native macOS HIG styling with SF Symbols, system vibrancy, universal binary for Apple Silicon (M1-M4) and Intel Macs.</p>
+        </div>
+      </div>
+
+      <!-- VS Code Extension -->
+      <div class="glass-panel rounded-2xl overflow-hidden neon-card-cyan flex flex-col">
+        <div class="p-4 border-b border-white/10 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <span class="text-xl">🧩</span>
+            <span class="font-semibold text-on-surface text-sm">VS Code & Cursor</span>
+          </div>
+          <span class="text-xs bg-secondary/10 text-secondary border border-secondary/20 rounded-full px-2.5 py-0.5 font-medium">VSIX Extension</span>
+        </div>
+        <div class="bg-black/40 overflow-hidden flex-1 group">
+          <img src="vscode_preview.png" alt="Underhood VS Code Extension Preview" class="w-full h-56 object-cover object-top transition-transform duration-300 group-hover:scale-105"/>
+        </div>
+        <div class="p-4 bg-surface-container-low/50 border-t border-white/5 text-xs text-on-surface-variant flex flex-col gap-2">
+          <div class="font-semibold text-on-surface text-sm">Webview & Theme Sync</div>
+          <p class="leading-relaxed">Full theme token synchronization, keyboard shortcut (Ctrl+Shift+U), and seamless compatibility with VS Code, Cursor, and Windsurf.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURE SCREENSHOT GALLERY ─────────────────────────────────────── -->
+<section class="py-20 px-6 relative z-10" id="gallery">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center gap-1.5 bg-primary/10 border border-primary/25 rounded-full px-3 py-1 text-xs text-primary font-medium mb-3">
+        In-Depth Capabilities
+      </div>
+      <h2 class="font-display font-bold text-4xl text-on-surface mb-3">Feature Gallery</h2>
+      <p class="text-on-surface-variant text-lg max-w-2xl mx-auto">Explore the deep diagnostic tools, multi-runtime execution engines, and local sandbox management.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- 1. Python Auto-Install -->
+      <div class="glass-panel rounded-2xl overflow-hidden neon-card flex flex-col">
+        <div class="p-3.5 border-b border-white/10 flex items-center justify-between bg-surface-container/40">
+          <span class="font-semibold text-on-surface text-xs flex items-center gap-1.5"><span class="text-primary">🐍</span> Python 3.12 Auto-Install</span>
+          <span class="text-[10px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">.underhood_libs</span>
+        </div>
+        <img src="preview_python_run.png" alt="Python Auto-Install Run" class="w-full h-48 object-cover object-top hover:opacity-95 transition-opacity"/>
+        <div class="p-4 bg-surface-container-low/40 text-xs text-on-surface-variant flex-1">
+          Detects missing requirements like <code>fastv</code>, resolves PyPI packages, installs to isolated sandbox, and passes pre-flight malware scan.
+        </div>
+      </div>
+
+      <!-- 2. TypeScript / Bun Runner -->
+      <div class="glass-panel rounded-2xl overflow-hidden neon-card-cyan flex flex-col">
+        <div class="p-3.5 border-b border-white/10 flex items-center justify-between bg-surface-container/40">
+          <span class="font-semibold text-on-surface text-xs flex items-center gap-1.5"><span class="text-secondary">⚡</span> TypeScript & Bun Engine</span>
+          <span class="text-[10px] font-mono text-secondary bg-secondary/10 px-2 py-0.5 rounded">Zero-Config</span>
+        </div>
+        <img src="preview_bun_run.png" alt="TypeScript and Bun Execution" class="w-full h-48 object-cover object-top hover:opacity-95 transition-opacity"/>
+        <div class="p-4 bg-surface-container-low/40 text-xs text-on-surface-variant flex-1">
+          High-performance TypeScript execution powered by Bun. Zero manual compilation or node_modules headaches.
+        </div>
+      </div>
+
+      <!-- 3. Rust Cargo Runner -->
+      <div class="glass-panel rounded-2xl overflow-hidden neon-card flex flex-col">
+        <div class="p-3.5 border-b border-white/10 flex items-center justify-between bg-surface-container/40">
+          <span class="font-semibold text-on-surface text-xs flex items-center gap-1.5"><span class="text-[#f59e0b]">🦀</span> Rust Cargo Toolchain</span>
+          <span class="text-[10px] font-mono text-[#f59e0b] bg-[#f59e0b]/10 px-2 py-0.5 rounded">Native Build</span>
+        </div>
+        <img src="preview_rust_toolchain.png" alt="Rust Cargo Toolchain" class="w-full h-48 object-cover object-top hover:opacity-95 transition-opacity"/>
+        <div class="p-4 bg-surface-container-low/40 text-xs text-on-surface-variant flex-1">
+          Detects Cargo.toml workspaces, builds with native compiler discovery, and captures compile-time warnings and diagnostics.
+        </div>
+      </div>
+
+      <!-- 4. Downloads & Local Cache -->
+      <div class="glass-panel rounded-2xl overflow-hidden neon-card flex flex-col">
+        <div class="p-3.5 border-b border-white/10 flex items-center justify-between bg-surface-container/40">
+          <span class="font-semibold text-on-surface text-xs flex items-center gap-1.5"><span class="text-primary">💾</span> Cache & Downloads Manager</span>
+          <span class="text-[10px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded">Reclaim Disk</span>
+        </div>
+        <img src="preview_cache_manager.png" alt="Downloads & Cache Manager" class="w-full h-48 object-cover object-top hover:opacity-95 transition-opacity"/>
+        <div class="p-4 bg-surface-container-low/40 text-xs text-on-surface-variant flex-1">
+          Shows all downloaded runtimes and sandboxed package folders across repos. Reclaim gigabytes of disk space with one click.
+        </div>
+      </div>
+
+      <!-- 5. Audit Trail & History -->
+      <div class="glass-panel rounded-2xl overflow-hidden neon-card-cyan flex flex-col">
+        <div class="p-3.5 border-b border-white/10 flex items-center justify-between bg-surface-container/40">
+          <span class="font-semibold text-on-surface text-xs flex items-center gap-1.5"><span class="text-secondary">📜</span> Execution Audit History</span>
+          <span class="text-[10px] font-mono text-secondary bg-secondary/10 px-2 py-0.5 rounded">Telemetry</span>
+        </div>
+        <img src="preview_history.png" alt="Audit History Log" class="w-full h-48 object-cover object-top hover:opacity-95 transition-opacity"/>
+        <div class="p-4 bg-surface-container-low/40 text-xs text-on-surface-variant flex-1">
+          Full execution history with exit codes, memory consumption, timestamped logs, and security clearance reports.
+        </div>
+      </div>
+
+      <!-- 6. Sandbox & Security Settings -->
+      <div class="glass-panel rounded-2xl overflow-hidden neon-card flex flex-col">
+        <div class="p-3.5 border-b border-white/10 flex items-center justify-between bg-surface-container/40">
+          <span class="font-semibold text-on-surface text-xs flex items-center gap-1.5"><span class="text-error">🛡️</span> Security & Defender Config</span>
+          <span class="text-[10px] font-mono text-error bg-error/10 px-2 py-0.5 rounded">Zero-Trust</span>
+        </div>
+        <img src="preview_settings.png" alt="Sandbox and Security Settings" class="w-full h-48 object-cover object-top hover:opacity-95 transition-opacity"/>
+        <div class="p-4 bg-surface-container-low/40 text-xs text-on-surface-variant flex-1">
+          Granular controls for Windows Defender scanning, API credential leak detection, Docker sandboxing, and execution timeouts.
+        </div>
       </div>
     </div>
   </div>
@@ -626,7 +803,7 @@
       </div>
 
       <!-- WITH -->
-      <div class="flex-1 glass-panel rounded-2xl overflow-hidden border border-primary/30 relative shadow-[0_0_40px_rgba(78,222,163,0.08)]">
+      <div class="flex-1 glass-panel rounded-2xl overflow-hidden border border-primary/30 relative shadow-xl">
         <div class="absolute inset-0 bg-primary/4 pointer-events-none"></div>
         <div class="bg-surface-container-highest/80 px-4 py-3 border-b border-primary/30 flex justify-between items-center relative z-10">
           <span class="text-sm font-bold text-primary flex items-center gap-1.5"><span class="material-symbols-outlined text-[15px]">check_circle</span>With Underhood</span>
@@ -649,7 +826,7 @@
     </div>
 
     <!-- Stats bar -->
-    <div class="glass-panel-heavy rounded-2xl p-6 flex flex-wrap justify-around items-center border border-primary/20 shadow-[inset_0_0_30px_rgba(78,222,163,0.04)]">
+    <div class="glass-panel-heavy rounded-2xl p-6 flex flex-wrap justify-around items-center border border-primary/20 shadow-inner">
       <div class="text-center px-4">
         <div class="font-display font-bold text-5xl text-gradient leading-none mb-1">95%</div>
         <div class="text-sm text-on-surface-variant">fewer tokens per run</div>
